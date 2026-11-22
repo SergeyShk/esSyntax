@@ -1,0 +1,17 @@
+[package]
+name = "essyntax"
+description = "Fast Spanish dependency parser: heads and Universal Dependencies relations"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage = "https://sergeyshk.github.io/esSyntax/"
+readme = "README.md"
+keywords = ["syntax", "parser", "dependency-parsing", "spanish", "nlp"]
+categories = ["text-processing"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
