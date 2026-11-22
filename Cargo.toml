@@ -13,3 +13,7 @@ repository = "https://github.com/SergeyShk/esSyntax"
 [profile.release]
 lto = "fat"
 codegen-units = 1
+
+# The check test parses a file with the real model: without optimizations it takes a minute instead of a second
+[profile.test]
+opt-level = 3
