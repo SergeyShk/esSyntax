@@ -18,7 +18,8 @@ Fast Spanish dependency parser written in Rust, the core of the
   of the model.
 - Sentences of close length are parsed four at once: `Parser::parse_many`.
 
-The model is not part of the crate: the parser reads it from a file.
+The model is not part of the crate: the parser reads it from a file, such as `data/es-syntax.bin` of the repository
+(CC BY 4.0, [LICENSE-MODEL.txt](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE-MODEL.txt)).
 
 ## Example
 

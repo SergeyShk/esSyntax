@@ -1,0 +1,21 @@
+The model of esSyntax (data/es-syntax.bin) and the check file of its forward pass
+(data/check.conllu: the first 200 sentences of the development part with the parses of the model)
+are made from the training and development parts of the Universal Dependencies treebank
+UD_Spanish-AnCora, release 2.19 (https://github.com/UniversalDependencies/UD_Spanish-AnCora),
+licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). The
+treebank comes from the AnCora corpus of the University of Barcelona (http://clic.ub.edu/corpus/):
+
+  Taulé, M., M. A. Martí, M. Recasens (2008). AnCora: Multilevel Annotated Corpora for Catalan
+  and Spanish. Proceedings of the 6th International Conference on Language Resources and
+  Evaluation (LREC 2008). Marrakesh, Morocco.
+
+and was converted to Universal Dependencies by Héctor Martínez Alonso and Daniel Zeman.
+
+The part-of-speech tags and features the model is trained on are given by esMorph
+(https://github.com/SergeyShk/esMorph).
+
+The esSyntax model is an adaptation of that data and is distributed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+The esSyntax code is distributed under the MIT License (LICENSE.txt).

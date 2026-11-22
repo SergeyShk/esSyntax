@@ -65,7 +65,8 @@ Los informes de errores, las ideas y los pull requests son bienvenidos, en ingl�
 *   **crates/essyntax** - el núcleo del analizador en Rust
 *   **crates/essyntax-py** - el módulo de Python `essyntax._essyntax`, compilado con PyO3
 *   **python/essyntax** - el paquete de Python
-*   **scripts** - la comprobación del paquete instalado antes de publicar y las licencias de los crates del módulo
+*   **data** - el modelo y la comprobación de su paso hacia adelante en Rust frente a PyTorch
+*   **scripts** - la exportación de los treebanks de UD y el entrenamiento del modelo, la comprobación del paquete instalado antes de publicar y las licencias de los crates del módulo
 *   **docs** - la documentación de MkDocs en inglés y en español
 *   **tests** - las pruebas del paquete de Python
 
@@ -77,4 +78,4 @@ Los informes de errores, las ideas y los pull requests son bienvenidos, en ingl�
 
 ## Licencia
 
-El código se distribuye bajo la licencia [MIT](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE.txt).
+El código se distribuye bajo la licencia [MIT](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE.txt). El modelo está entrenado con el treebank [UD Spanish AnCora](https://github.com/UniversalDependencies/UD_Spanish-AnCora) y se distribuye bajo la licencia [CC BY 4.0](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE-MODEL.txt).

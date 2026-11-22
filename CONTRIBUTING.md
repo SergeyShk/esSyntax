@@ -18,7 +18,7 @@ make deps                   # create the environment, install all dependencies a
 uv run pre-commit install   # hooks: linters on commit, tests on push
 ```
 
-The Rust module is built when the package is installed into the environment; `uv run` rebuilds it when the files of `crates/` or `Cargo.toml` change. The full list of commands is in `make help`.
+The Rust module is built when the package is installed into the environment; `uv run` rebuilds it when the files of `crates/` or `Cargo.toml` change. The model (`data/es-syntax.bin`) is trained by `make model`: it downloads the UD treebanks and trains the model on MPS or CPU (about 40 minutes on an Apple M3 Pro), with the versions of the training packages pinned in `scripts/train.py.lock`. The full list of commands is in `make help`.
 
 ## Checks
 
@@ -52,7 +52,7 @@ The pull request description answers two questions: what was done and why. If it
 - `python/essyntax/` - the Python package over the module.
 - `tests/` - tests of the Python package; `tests/test_docs.py` keeps the two documentation languages in sync.
 - `docs/` - MkDocs (Material) documentation, `mkdocs.yml` - navigation and its Spanish translation.
-- `scripts/` - `smoke.py` checks the installed package before publishing, `notices.py` writes the licenses of the crates of the module.
+- `scripts/` - `export_ud.py` downloads the UD treebanks and `train.py` trains the model, `smoke.py` checks the installed package before publishing, `notices.py` writes the licenses of the crates of the module. The versions of the packages of a script with dependencies are pinned next to it, in `*.py.lock`.
 - `.github/workflows/` - CI (`ci.yml`), publishing (`publish.yml`), documentation (`docs.yml`: the site is published on a release tag).
 
 The sdist is made of the files tracked by git (`sdist-generator = "git"`), so that `maturin build --locked` works on it with all the members of the workspace in place. It can only be made inside a git checkout: `uv build` and `python -m build` fail on an unpacked source archive, while `pip install` and `maturin build` of the sdist work anywhere.
