@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use esSyntax in research or software, please cite it."
+title: "esSyntax, a fast dependency parser for Spanish"
+type: software
+authors:
+  - family-names: Shkarin
+    given-names: Sergey
+    email: kouki.sergey@gmail.com
+repository-code: "https://github.com/SergeyShk/esSyntax"
+url: "https://sergeyshk.github.io/esSyntax/"
+license: MIT
+keywords:
+  - spanish
+  - nlp
+  - syntax
+  - dependency parsing
+  - universal dependencies
+  - rust
+abstract: "esSyntax is a dependency parser of Spanish with a Rust core and a Python API: for every word of a sentence it finds the head and the Universal Dependencies relation. Work in progress."

@@ -1,0 +1,22 @@
+name: Feature request
+description: A new feature of the parser or the API
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve
+      description: What you want to do with texts and why the current features are not enough
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How it could look in the API - a function, a parameter and an example of the result
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to submit a pull request
