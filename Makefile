@@ -31,7 +31,7 @@ lock: uv ## Update the lock files to the latest versions of the dependencies
 
 model: uv ## Download the UD treebanks and train the model: data/es-syntax.bin and data/check.conllu
 	uv run python $(SCRIPTS_PATH)/export_ud.py target/ud
-	uv run --python 3.13 $(SCRIPTS_PATH)/train.py target/ud --output data/es-syntax.bin --check data/check.conllu
+	uv run --python 3.13 $(SCRIPTS_PATH)/train.py target/ud --seed 3 --output data/es-syntax.bin --check data/check.conllu
 
 lint: ruff mypy rust-lint ## Run all code checks
 

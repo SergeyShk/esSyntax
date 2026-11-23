@@ -25,7 +25,7 @@ El modelo está entrenado con las partes de entrenamiento de los treebanks [UD S
 
 El punto del entrenamiento se elige por el LAS en AnCora dev, y GSD dev sirve de control. De tres entrenamientos, el que tiene el mejor LAS en AnCora dev es el modelo del paquete: 89.42 en AnCora dev y 81.92 en GSD dev (`parser.sources["dev_las"]`).
 
-`make model` reproduce el entrenamiento: `scripts/export_ud.py` descarga los treebanks y comprueba su SHA-256, y `scripts/train.py` con las versiones de los paquetes fijadas (`scripts/train.py.lock`) entrena el modelo y escribe los pesos en `data/es-syntax.bin`. En MPS y en GPU el entrenamiento no es determinista: repetirlo da pesos cercanos, pero no iguales. Junto con los pesos escribe `data/check.conllu` - el análisis de las 200 primeras oraciones de AnCora dev por el mismo modelo en PyTorch: una prueba del crate comprueba con él el paso hacia adelante en Rust.
+`make model` reproduce el entrenamiento: `scripts/export_ud.py` descarga los treebanks y comprueba su SHA-256, y `scripts/train.py` con las versiones de los paquetes fijadas (`scripts/train.py.lock`) entrena el modelo y escribe los pesos en `data/es-syntax.bin`. El modelo del paquete es el entrenamiento con la semilla 3 (`parser.sources["seed"]`), y `make model` pasa `--seed 3` para repetirlo. En MPS y en GPU el entrenamiento no es determinista: repetirlo da pesos cercanos, pero no iguales. Junto con los pesos escribe `data/check.conllu` - el análisis de las 200 primeras oraciones de AnCora dev por el mismo modelo en PyTorch: una prueba del crate comprueba con él el paso hacia adelante en Rust.
 
 ## Calidad { #quality }
 

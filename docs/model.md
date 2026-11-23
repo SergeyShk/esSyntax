@@ -25,7 +25,7 @@ The model is trained on the training parts of the treebanks [UD Spanish AnCora](
 
 The training point is chosen by LAS on AnCora dev, and GSD dev is a control. Of three training runs the one with the best LAS on AnCora dev is the package model: 89.42 on AnCora dev and 81.92 on GSD dev (`parser.sources["dev_las"]`).
 
-`make model` reproduces the training: `scripts/export_ud.py` downloads the treebanks and checks their SHA-256, and `scripts/train.py` with pinned package versions (`scripts/train.py.lock`) trains the model and writes the weights to `data/es-syntax.bin`. On MPS and GPU training is non-deterministic: a rerun gives close but not the same weights. Together with the weights it writes `data/check.conllu` - the parse of the first 200 sentences of AnCora dev by the same model in PyTorch: a test of the crate checks the Rust forward pass against it.
+`make model` reproduces the training: `scripts/export_ud.py` downloads the treebanks and checks their SHA-256, and `scripts/train.py` with pinned package versions (`scripts/train.py.lock`) trains the model and writes the weights to `data/es-syntax.bin`. The package model is the run with seed 3 (`parser.sources["seed"]`), and `make model` passes `--seed 3` to repeat it. On MPS and GPU training is non-deterministic: a rerun gives close but not the same weights. Together with the weights it writes `data/check.conllu` - the parse of the first 200 sentences of AnCora dev by the same model in PyTorch: a test of the crate checks the Rust forward pass against it.
 
 ## Quality { #quality }
 
