@@ -12,6 +12,7 @@ nav:
 theme:
   name: material
   language: en
+  favicon: img/favicon.png
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
