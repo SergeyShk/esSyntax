@@ -1,21 +1,36 @@
-The model of esSyntax (data/es-syntax.bin) and the check file of its forward pass
-(data/check.conllu: the first 200 sentences of the development part with the parses of the model)
-are made from the training and development parts of the Universal Dependencies treebank
-UD_Spanish-AnCora, release 2.19 (https://github.com/UniversalDependencies/UD_Spanish-AnCora),
-licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). The
-treebank comes from the AnCora corpus of the University of Barcelona (http://clic.ub.edu/corpus/):
+The model of esSyntax (data/es-syntax.bin) is made from the training and development parts of the
+Universal Dependencies treebanks, release 2.19 (https://universaldependencies.org):
 
-  Taulé, M., M. A. Martí, M. Recasens (2008). AnCora: Multilevel Annotated Corpora for Catalan
-  and Spanish. Proceedings of the 6th International Conference on Language Resources and
-  Evaluation (LREC 2008). Marrakesh, Morocco.
+- UD_Spanish-AnCora (https://github.com/UniversalDependencies/UD_Spanish-AnCora), licensed under
+  the Creative Commons Attribution 4.0 International License (CC BY 4.0). The treebank comes from
+  the AnCora corpus of the University of Barcelona (http://clic.ub.edu/corpus/) and was converted
+  to Universal Dependencies by Héctor Martínez Alonso and Daniel Zeman:
 
-and was converted to Universal Dependencies by Héctor Martínez Alonso and Daniel Zeman.
+    Taulé, M., M. A. Martí, M. Recasens (2008). AnCora: Multilevel Annotated Corpora for Catalan
+    and Spanish. Proceedings of the 6th International Conference on Language Resources and
+    Evaluation (LREC 2008). Marrakesh, Morocco.
+
+- UD_Spanish-GSD (https://github.com/UniversalDependencies/UD_Spanish-GSD), licensed under the
+  Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0). The treebank
+  was annotated and converted by Google, by Miguel Ballesteros, Héctor Martínez Alonso, Ryan
+  McDonald, Elena Pascual, Natalia Silveira, Daniel Zeman, Joakim Nivre and John Bauer (original
+  treebank contributors: Yvonne Quirmbach-Brundage, Adam LaMontagne, Milan Souček, Timo Järvinen
+  and Alessandra Radici):
+
+    McDonald, R., J. Nivre, Y. Quirmbach-Brundage, Y. Goldberg, D. Das, K. Ganchev, K. Hall,
+    S. Petrov, H. Zhang, O. Täckström, C. Bedini, N. Bertomeu Castelló, J. Lee (2013). Universal
+    Dependency Annotation for Multilingual Parsing. Proceedings of ACL 2013.
 
 The part-of-speech tags and features the model is trained on are given by esMorph
 (https://github.com/SergeyShk/esMorph).
 
 The esSyntax model is an adaptation of that data and is distributed under the Creative Commons
-Attribution 4.0 International License (CC BY 4.0):
-https://creativecommons.org/licenses/by/4.0/
+Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0):
+https://creativecommons.org/licenses/by-sa/4.0/
+
+The check file of the forward pass of the model (data/check.conllu) holds the first 200 sentences
+of the development part of UD_Spanish-AnCora with the parses of the model. Its text is that of
+UD_Spanish-AnCora only, and the file is distributed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
 
 The esSyntax code is distributed under the MIT License (LICENSE.txt).

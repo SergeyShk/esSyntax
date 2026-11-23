@@ -2,9 +2,9 @@
 Training and development parts of the Universal Dependencies treebanks for the esSyntax model
 
 Description:
-    Downloads the training and development parts of UD_Spanish-AnCora (CC BY 4.0) and the
-    development part of UD_Spanish-GSD (CC BY-SA 4.0) of a pinned UD release and checks their
-    SHA-256: the model is trained on AnCora, and GSD dev is a control on another genre. Downloaded
+    Downloads the training and development parts of UD_Spanish-AnCora (CC BY 4.0) and
+    UD_Spanish-GSD (CC BY-SA 4.0) of a pinned UD release and checks their SHA-256: the model is
+    trained on both, AnCora dev chooses the training point, and GSD dev is a control. Downloaded
     files with the right checksum are not downloaded again; the description of the sources is
     written next to them (sources.json)
 
@@ -32,6 +32,7 @@ SOURCES = {
     "UD_Spanish-GSD": (
         "c262f3ca7897ea3b7719731d5958948614e3a214",
         {
+            "es_gsd-ud-train.conllu": "f8e0c5ba75d33f78ab7299355924ea9923067a4554a5eff4e04b71064b1835fd",
             "es_gsd-ud-dev.conllu": "5c701ddde2de7ac10032665dcfb8ea39316584ec032ac46ed44a4a567afec82f",
         },
     ),
