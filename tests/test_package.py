@@ -76,7 +76,7 @@ def test_wheel_contents(tmp_path):
     assert len(modules) == 1
     assert all(name.startswith(("essyntax/", "essyntax-")) for name in names)
     licenses = {name.rsplit("/", 1)[1] for name in names if "/licenses/" in name}
-    assert licenses == {"LICENSE.txt", "THIRD-PARTY-NOTICES.txt"}
+    assert licenses == {"LICENSE.txt", "LICENSE-MODEL.txt", "THIRD-PARTY-NOTICES.txt"}
 
 
 @pytest.mark.skipif(shutil.which("cargo") is None, reason="cargo reads the crates")
