@@ -45,6 +45,13 @@ print([(word.form, word.head, word.deprel) for word in document.words])
 
 `parse_text` splits the text into sentences, tokens and words with the [anySeg](https://github.com/SergeyShk/anySeg) segmenter, gives the words their lemma, part of speech and features with the [esMorph](https://github.com/SergeyShk/esMorph) morphological analyzer, which also splits a verb with clitics into its words (`pónganselo` - `pongan`, `se`, `lo`), and finds the head (the word number from 1, 0 for the root) and the relation of every word; the document keeps the multiword tokens (`al` - `a`, `el`). `parser.annotate(document)` parses an anySeg document that already has its morphology, `parser.parse(words, upos, feats)` parses a sentence with your own parts of speech and features, and `parser.parse_many(sentences)` parses many sentences at once.
 
+The `essyntax` command comes with the package and parses text from files or the standard input into [CoNLL-U](https://universaldependencies.org/format.html); its input can also be CoNLL-U with your own parts of speech and features (`essyntax -i conllu`), and `essyntax --help` lists its options:
+
+```bash
+echo "Voy al cine." | essyntax
+essyntax text.txt -o text.conllu
+```
+
 ## Development
 
 The project uses [uv](https://docs.astral.sh/uv/) to manage dependencies, [maturin](https://www.maturin.rs/) to build the Rust module and [ruff](https://docs.astral.sh/ruff/) for linting and formatting. Python 3.11 or newer and Rust 1.88 or newer are required.
@@ -77,7 +84,7 @@ Bug reports, ideas and pull requests are welcome, in English or Spanish - the [i
 
 *   **crates/essyntax** - the parser core in Rust
 *   **crates/essyntax-py** - the Python module `essyntax._essyntax` built with PyO3
-*   **python/essyntax** - the Python package
+*   **python/essyntax** - the Python package and the `essyntax` command
 *   **data** - the model and the check of its forward pass in Rust against PyTorch
 *   **scripts** - exporting the UD treebanks and training the model, checking the installed package before publishing and the licenses of the crates of the module
 *   **docs** - MkDocs documentation in English and Spanish

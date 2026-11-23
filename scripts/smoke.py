@@ -1,10 +1,13 @@
 """
-Check of the installed package before publishing: parsing of text and the tags of esMorph
+Check of the installed package before publishing: parsing of text, the tags of esMorph and the
+command essyntax
 
 Run as `python scripts/smoke.py [version]`; from the `scripts` directory the package is the installed
 one, not the sources of the repository.
 """
 
+import shutil
+import subprocess
 import sys
 import sysconfig
 from pathlib import Path
@@ -43,4 +46,18 @@ assert total > 4000 and max(upos_diff, feats_diff) <= total * 0.005, (
     upos_diff,
     feats_diff,
 )
+# The command: as a module and as the console script next to the interpreter
+result = subprocess.run(
+    [sys.executable, "-m", "essyntax"],
+    input="Voy al cine.\n",
+    capture_output=True,
+    encoding="utf-8",
+    check=True,
+)
+assert "2-3\tal\t" in result.stdout and "1\tVoy\tir\tVERB" in result.stdout, result
+assert "\t0\troot\t" in result.stdout, result
+script = shutil.which("essyntax", path=str(Path(sys.executable).parent))
+assert script is not None, Path(sys.executable).parent
+result = subprocess.run([script, "-V"], capture_output=True, encoding="utf-8", check=True)
+assert result.stdout.startswith(f"essyntax {essyntax.__version__} ("), result
 print(f"essyntax {essyntax.__version__}")

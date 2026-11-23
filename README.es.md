@@ -45,6 +45,13 @@ print([(word.form, word.head, word.deprel) for word in document.words])
 
 `parse_text` divide el texto en oraciones, tokens y palabras con el segmentador [anySeg](https://github.com/SergeyShk/anySeg), da a las palabras su lema, categoría gramatical y rasgos con el analizador morfológico [esMorph](https://github.com/SergeyShk/esMorph), que además divide un verbo con clíticos en sus palabras (`pónganselo` - `pongan`, `se`, `lo`), y encuentra la palabra de la que depende cada palabra (su número desde 1, 0 para la raíz) y la relación entre ambas; el documento conserva los tokens multipalabra (`al` - `a`, `el`). `parser.annotate(document)` analiza un documento de anySeg que ya tiene su morfología, `parser.parse(words, upos, feats)` analiza una oración con categorías gramaticales y rasgos propios, y `parser.parse_many(sentences)` analiza muchas oraciones a la vez.
 
+El comando `essyntax` se instala con el paquete y analiza el texto de archivos o de la entrada estándar en [CoNLL-U](https://universaldependencies.org/format.html); la entrada también puede ser CoNLL-U con categorías gramaticales y rasgos propios (`essyntax -i conllu`), y `essyntax --help` muestra sus opciones:
+
+```bash
+echo "Voy al cine." | essyntax
+essyntax texto.txt -o texto.conllu
+```
+
 ## Desarrollo
 
 El proyecto usa [uv](https://docs.astral.sh/uv/) para gestionar las dependencias, [maturin](https://www.maturin.rs/) para compilar el módulo de Rust y [ruff](https://docs.astral.sh/ruff/) para el análisis y el formato del código. Se requieren Python 3.11 o superior y Rust 1.88 o superior.
@@ -77,7 +84,7 @@ Los informes de errores, las ideas y los pull requests son bienvenidos, en ingl�
 
 *   **crates/essyntax** - el núcleo del analizador en Rust
 *   **crates/essyntax-py** - el módulo de Python `essyntax._essyntax`, compilado con PyO3
-*   **python/essyntax** - el paquete de Python
+*   **python/essyntax** - el paquete de Python y el comando `essyntax`
 *   **data** - el modelo y la comprobación de su paso hacia adelante en Rust frente a PyTorch
 *   **scripts** - la exportación de los treebanks de UD y el entrenamiento del modelo, la comprobación del paquete instalado antes de publicar y las licencias de los crates del módulo
 *   **docs** - la documentación de MkDocs en inglés y en español

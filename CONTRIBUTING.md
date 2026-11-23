@@ -49,7 +49,7 @@ The pull request description answers two questions: what was done and why. If it
 
 - `crates/essyntax/` - the parser core in Rust; published on crates.io.
 - `crates/essyntax-py/` - the Python module `essyntax._essyntax` built with PyO3, not published separately.
-- `python/essyntax/` - the Python package over the module.
+- `python/essyntax/` - the Python package over the module and the `essyntax` command.
 - `tests/` - tests of the Python package; `tests/test_docs.py` keeps the two documentation languages in sync.
 - `docs/` - MkDocs (Material) documentation, `mkdocs.yml` - navigation and its Spanish translation.
 - `scripts/` - `export_ud.py` downloads the UD treebanks and `train.py` trains the model, `smoke.py` checks the installed package before publishing, `notices.py` writes the licenses of the crates of the module. The versions of the packages of a script with dependencies are pinned next to it, in `*.py.lock`.
