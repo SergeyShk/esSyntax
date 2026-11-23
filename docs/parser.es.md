@@ -29,7 +29,9 @@ Excepciones:
     [('La', 2, 'det'), ('gata', 6, 'nsubj'), ('que', 4, 'obj'), ('vi', 2, 'acl:relcl'), ('ayer', 4, 'advmod'), ('dormía', 0, 'root'), ('en', 9, 'case'), ('el', 9, 'det'), ('porche', 6, 'obl'), ('.', 6, 'punct')]
     ```
 
-<!-- figure: the parse of a sentence as arcs from the head to the dependent (docs/img/arcs.svg, arcs.es.svg) -->
+El análisis de otra oración como arcos del núcleo al dependiente, con los nombres escolares de las relaciones junto a las etiquetas de UD (la correspondencia es aproximada: en UD `del vecino` es un modificador nominal `nmod` de `hija`, y la preposición depende de su sustantivo como `case`):
+
+![Los arcos de dependencias de «Ayer la hija del vecino compró un coche nuevo.» con los nombres de las relaciones](img/arcs.svg)
 
 ## Parámetros { #parameters }
 

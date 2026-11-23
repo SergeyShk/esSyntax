@@ -6,7 +6,7 @@ essyntax [options] [file ...]
 
 The command parses text from files or the standard input and writes [CoNLL-U](https://universaldependencies.org/format.html): for every word its lemma, part of speech and features, its head and its [Universal Dependencies](https://universaldependencies.org/) relation. It is installed with the package (`pip install essyntax`) and also runs as `python -m essyntax`. The [anySeg](https://sergeyshk.github.io/anySeg/) segmenter splits the text into sentences, tokens and their words, and the [esMorph](https://sergeyshk.github.io/esMorph/) morphological analyzer gives the parts of speech and features - the versions installed with the package - so the result is that of [`parse_text`](parser.md#parse_text).
 
-<!-- comparison: the speed of the command, one thread, words per second with the morphology (performance.md) -->
+In one thread the command parses about 30 thousand words a second of raw text together with the segmentation and the morphology (the raw text of UD Spanish PUD test, Apple M3 Pro); other parsers are compared on the [Comparison](performance.md) page.
 
 ``` bash
 echo "Mi madre lava la ropa." | essyntax

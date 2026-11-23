@@ -35,7 +35,7 @@
 <path d="M655.0 216.0L655.0 237.0" stroke="#c62828" stroke-width="2"/>
 <path d="M649.0 236.4L661.0 236.4L655.0 246.0Z" fill="#c62828"/>
 <rect x="40.0" y="246.0" width="370.0" height="44.0" rx="8" fill="#fdecea" stroke="#c62828" stroke-width="1.5"/>
-<text x="225.0" y="272.9" font-size="14" fill="#212121" text-anchor="middle">MLP del regente: 128 y 128</text>
+<text x="225.0" y="272.9" font-size="14" fill="#212121" text-anchor="middle">MLP del núcleo: 128 y 128</text>
 <path d="M225.0 290.0L225.0 303.0" stroke="#c62828" stroke-width="2"/>
 <path d="M219.0 302.4L231.0 302.4L225.0 312.0Z" fill="#c62828"/>
 <rect x="40.0" y="312.0" width="370.0" height="44.0" rx="8" fill="#fdecea" stroke="#c62828" stroke-width="1.5"/>
@@ -43,7 +43,7 @@
 <path d="M225.0 356.0L225.0 369.0" stroke="#c62828" stroke-width="2"/>
 <path d="M219.0 368.4L231.0 368.4L225.0 378.0Z" fill="#c62828"/>
 <rect x="40.0" y="378.0" width="370.0" height="44.0" rx="8" fill="#fdecea" stroke="#c62828" stroke-width="1.5"/>
-<text x="225.0" y="404.9" font-size="14" fill="#212121" text-anchor="middle">softmax por j: P(regente j | palabra i)</text>
+<text x="225.0" y="404.9" font-size="14" fill="#212121" text-anchor="middle">softmax por j: P(núcleo j | palabra i)</text>
 <path d="M225.0 422.0L225.0 435.0" stroke="#c62828" stroke-width="2"/>
 <path d="M219.0 434.4L231.0 434.4L225.0 444.0Z" fill="#c62828"/>
 <rect x="40.0" y="444.0" width="370.0" height="44.0" rx="8" fill="#fdecea" stroke="#c62828" stroke-width="1.5"/>
@@ -53,17 +53,17 @@
 <path d="M655.0 290.0L655.0 435.0" stroke="#c62828" stroke-width="2"/>
 <path d="M649.0 434.4L661.0 434.4L655.0 444.0Z" fill="#c62828"/>
 <rect x="470.0" y="444.0" width="370.0" height="44.0" rx="8" fill="#fdecea" stroke="#c62828" stroke-width="1.5"/>
-<text x="655.0" y="463.2" font-size="14" fill="#212121" text-anchor="middle">capa lineal sobre [d<tspan baseline-shift="sub" font-size="70%">i</tspan>; h del regente]</text>
+<text x="655.0" y="463.2" font-size="14" fill="#212121" text-anchor="middle">capa lineal sobre [d<tspan baseline-shift="sub" font-size="70%">i</tspan>; h del núcleo]</text>
 <text x="655.0" y="478.6" font-size="14" fill="#212121" text-anchor="middle">→ 45 relaciones UD</text>
 <path d="M410 466L461 466" stroke="#c62828" stroke-width="2"/>
 <path d="M470 466L460 460L460 472Z" fill="#c62828"/>
-<text x="440.0" y="458.0" font-size="12" fill="#c62828" text-anchor="middle">regentes</text>
+<text x="440.0" y="458.0" font-size="12" fill="#c62828" text-anchor="middle">núcleos</text>
 <path d="M225.0 488.0L225.0 507.0" stroke="#c62828" stroke-width="2"/>
 <path d="M219.0 506.4L231.0 506.4L225.0 516.0Z" fill="#c62828"/>
 <path d="M655.0 488.0L655.0 507.0" stroke="#c62828" stroke-width="2"/>
 <path d="M649.0 506.4L661.0 506.4L655.0 516.0Z" fill="#c62828"/>
 <rect x="40.0" y="516.0" width="800.0" height="44.0" rx="8" fill="#c62828" stroke="#c62828" stroke-width="1.5"/>
-<text x="440.0" y="543.2" font-size="15" fill="white" text-anchor="middle">el regente y la relación de cada palabra · 2,4 millones de parámetros, int8 por filas</text>
+<text x="440.0" y="543.2" font-size="15" fill="white" text-anchor="middle">el núcleo y la relación de cada palabra · 2,4 millones de parámetros, int8 por filas</text>
 <text x="440.0" y="590.0" font-size="13" fill="#6b6b6b" text-anchor="middle">Entrenado con AnCora y GSD (UD 2.19) con un marcador del corpus en la entrada;</text>
 <text x="440.0" y="608.0" font-size="13" fill="#6b6b6b" text-anchor="middle">cada texto se analiza con el marcador de AnCora, incorporado en la primera capa BiLSTM</text>
 </svg>

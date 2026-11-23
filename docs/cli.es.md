@@ -6,7 +6,7 @@ essyntax [opciones] [archivo ...]
 
 El comando analiza texto de archivos o de la entrada estándar y escribe [CoNLL-U](https://universaldependencies.org/format.html): para cada palabra su lema, su categoría gramatical y sus rasgos, su núcleo y su relación de [Universal Dependencies](https://universaldependencies.org/). Se instala con el paquete (`pip install essyntax`) y también se ejecuta como `python -m essyntax`. El segmentador [anySeg](https://sergeyshk.github.io/anySeg/) divide el texto en oraciones, tokens y sus palabras, y el analizador morfológico [esMorph](https://sergeyshk.github.io/esMorph/es/) da las categorías gramaticales y los rasgos - las versiones instaladas con el paquete -, así que el resultado es el de [`parse_text`](parser.md#parse_text).
 
-<!-- comparison: the speed of the command, one thread, words per second with the morphology (performance.md) -->
+En un hilo el comando analiza unas 30 mil palabras por segundo de texto en bruto junto con la segmentación y la morfología (el texto en bruto de UD Spanish PUD test, Apple M3 Pro); la comparación con otros analizadores está en la página de [comparación](performance.md).
 
 ``` bash
 echo "Mi madre lava la ropa." | essyntax

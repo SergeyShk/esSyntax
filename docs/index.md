@@ -49,7 +49,7 @@
 
 A sentence goes through three steps: the anySeg segmenter splits the text into tokens and their words (`del` is `de` + `el`), the esMorph morphological analyzer gives every word its part of speech and features - gender, number, person, mood - and esSyntax uses the words and their tags to find which word every word depends on and how: the subject depends on the verb, a determiner on its noun, a preposition on the word it introduces.
 
-<!-- figure: how esSyntax parses a sentence, from the text to the tree (docs/img/pipeline.svg, pipeline.es.svg) -->
+![How esSyntax parses a sentence: the text, the words, the parts of speech and features, the dependency tree](img/pipeline.svg)
 
 ## Installation
 

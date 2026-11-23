@@ -11,9 +11,13 @@ El modelo del paquete va dentro del módulo de extensión: no hace falta ningún
 - **Treebank** - en el entrenamiento la entrada de una palabra lleva además la marca del treebank de su oración, así que las convenciones de AnCora y de GSD no se mezclan. El modelo del paquete analiza todo texto como AnCora: la marca de AnCora va incluida en el sesgo de la primera capa de la LSTM.
 - **Pesos** - 2.4 millones de parámetros, matrices en int8 por filas con una escala por fila; el archivo ocupa 2.9 MB con los vocabularios de formas y terminaciones.
 
-<!-- figure: the architecture of the model, from the word input to the tree (docs/img/model.svg, model.es.svg) -->
+![El modelo: la entrada de una palabra, el codificador BiLSTM, las puntuaciones de núcleos y relaciones y el árbol, con los tamaños reales](img/model.svg)
 
-<!-- figure: the probabilities of the head candidates of the words of a sentence (docs/img/heads.svg, heads.es.svg), with a section on choosing the head if needed -->
+## Elección del núcleo { #heads }
+
+El modelo da a cada palabra una probabilidad para cada candidato a núcleo: el softmax de sus puntuaciones biafines sobre las palabras de la oración y la raíz. En `Vi a la niña con el telescopio.` el núcleo de `telescopio` no es seguro: `Vi` - el telescopio es el instrumento de ver, `obl` - recibe 0.81, y `niña` - la niña tiene el telescopio - recibe 0.19; todas las demás palabras tienen su núcleo con una probabilidad de 1.00. El árbol toma los núcleos más probables salvo que formen un ciclo o varias raíces; entonces Chu - Liu - Edmonds encuentra el mejor árbol con una sola raíz. Las probabilidades se devuelven con `probs=True` (véase [`parse`](parser.md#parse)); los números de la figura los calcula `scripts/figures.py` con el modelo del paquete.
+
+![Las probabilidades de los candidatos a núcleo de cada palabra de «Vi a la niña con el telescopio.»](img/heads.svg)
 
 ## Entrenamiento { #training }
 

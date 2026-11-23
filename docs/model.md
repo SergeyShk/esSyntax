@@ -11,9 +11,13 @@ The package model is built into the extension module: no weights file is needed,
 - **Treebank** - in training the input of a word also has the marker of the treebank of its sentence, so the conventions of AnCora and GSD do not mix. The package model parses every text as AnCora: the marker of AnCora is folded into the bias of the first LSTM layer.
 - **Weights** - 2.4 million parameters, matrices in int8 by rows with a scale per row; the file is 2.9 MB with the vocabularies of forms and endings.
 
-<!-- figure: the architecture of the model, from the word input to the tree (docs/img/model.svg, model.es.svg) -->
+![The model: the word input, the BiLSTM encoder, the head and relation scores and the tree, with the real sizes](img/model.svg)
 
-<!-- figure: the probabilities of the head candidates of the words of a sentence (docs/img/heads.svg, heads.es.svg), with a section on choosing the head if needed -->
+## Choosing the head { #heads }
+
+For every word the model gives a probability to each head candidate: the softmax of its biaffine scores over the words of the sentence and the root. In `Vi a la niña con el telescopio.` the head of `telescopio` is not certain: `Vi` - the telescope is the instrument of seeing, `obl` - gets 0.81, and `niña` - the girl has the telescope - gets 0.19; every other word has its head with a probability of 1.00. The tree takes the most probable heads unless they make a cycle or several roots; then Chu - Liu - Edmonds finds the best tree with one root. The probabilities are returned with `probs=True` (see [`parse`](parser.md#parse)); the numbers in the figure are computed by `scripts/figures.py` from the package model.
+
+![The probabilities of the head candidates of every word of «Vi a la niña con el telescopio.»](img/heads.svg)
 
 ## Training { #training }
 

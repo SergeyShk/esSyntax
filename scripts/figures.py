@@ -172,13 +172,13 @@ TEXTS: dict[str, dict[str, Any]] = {
             "{words} palabras",
             "vector de la palabra: {din}",
             "BiLSTM {layers} {x} {hidden}, en ambos sentidos: {out} por palabra",
-            ("MLP del regente: {arc} y {arc}", "MLP de la relación: {rel} y {rel}"),
+            ("MLP del núcleo: {arc} y {arc}", "MLP de la relación: {rel} y {rel}"),
             "puntuación biafín " + BIAFFINE,
-            "softmax por j: P(regente j | palabra i)",
+            "softmax por j: P(núcleo j | palabra i)",
             "Chu - Liu - Edmonds: árbol con una raíz",
-            "capa lineal sobre " + PAIR + " del regente]\n→ {labels} relaciones UD",
-            "regentes",
-            "el regente y la relación de cada palabra · {params} millones de parámetros, "
+            "capa lineal sobre " + PAIR + " del núcleo]\n→ {labels} relaciones UD",
+            "núcleos",
+            "el núcleo y la relación de cada palabra · {params} millones de parámetros, "
             "int8 por filas",
             (
                 "Entrenado con {treebanks} (UD {ud}) con un marcador del corpus en la entrada;",
@@ -188,10 +188,10 @@ TEXTS: dict[str, dict[str, Any]] = {
         ),
         "heads": (
             "Palabra",
-            "Candidato a regente",
+            "Candidato a núcleo",
             (
-                "P(regente | palabra): softmax de las puntuaciones biafines por fila;",
-                "el marco señala el regente en el árbol del análisis",
+                "P(núcleo | palabra): softmax de las puntuaciones biafines por fila;",
+                "el marco señala el núcleo en el árbol del análisis",
             ),
         ),
     },

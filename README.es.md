@@ -78,7 +78,21 @@ echo "Mi madre lava la ropa." | essyntax
 
 Las opciones, la entrada y la salida del comando están en la página del [comando essyntax](https://sergeyshk.github.io/esSyntax/es/cli/).
 
-<!-- comparison: the section "Calidad y velocidad" with the table of LAS on AnCora, GSD, PUD and COSER test and words per second against other parsers (docs/performance.es.md) goes here -->
+## Calidad y velocidad
+
+LAS desde el texto en bruto en las partes de prueba de los treebanks de UD 2.19 (script oficial de CoNLL 2018, con la puntuación), %, y velocidad en un hilo:
+
+| Sistema | AnCora | GSD | PUD | COSER | Palabras/s |
+| :------ | -----: | --: | --: | ----: | ---------: |
+| esSyntax | 89.25 | 80.95 | 81.97 | 65.52 | 31 253 |
+| spaCy es_core_news_sm | 79.77 | 70.48 | 72.82 | 59.24 | 34 069 |
+| spaCy es_dep_news_trf | 85.01 | 74.45 | 75.85 | 62.73 | 1332 |
+| Stanza | 89.19 | 84.89 | 83.99 | 65.43 | 1143 |
+| Stanza ancora | **90.90** | 80.20 | 81.41 | **66.76** | 1146 |
+| Stanza accurate | 90.67 | **87.14** | **85.17** | 66.47 | 424 |
+| UDPipe 1 | 78.73 | 68.48 | 72.19 | 58.24 | 6155 |
+
+El modelo de esSyntax está entrenado con AnCora y GSD y analiza con las convenciones de AnCora; Stanza y Stanza accurate, con AnCora y GSD, cuyas convenciones comparte PUD, y los demás modelos, con AnCora. Velocidad: un hilo, las palabras de referencia de la parte de prueba de AnCora, junto con el etiquetado (en esSyntax, el de esMorph); los demás sistemas, las métricas y las condiciones de la medición están en la página de [comparación](https://sergeyshk.github.io/esSyntax/es/performance/).
 
 ## Desarrollo
 
@@ -115,7 +129,7 @@ Los informes de errores, las ideas y los pull requests son bienvenidos, en ingl�
 *   **crates/essyntax-py** - el módulo de Python `essyntax._essyntax`, compilado con PyO3
 *   **python/essyntax** - el paquete de Python y el comando `essyntax`
 *   **data** - el modelo y la comprobación de su paso hacia adelante en Rust frente a PyTorch
-*   **scripts** - la exportación de los treebanks de UD y el entrenamiento del modelo, la comprobación del paquete instalado antes de publicar y las licencias de los crates del módulo
+*   **scripts** - la exportación de los treebanks de UD y el entrenamiento del modelo, la comparación con otros analizadores, las figuras de la documentación, la comprobación del paquete instalado antes de publicar y las licencias de los crates del módulo
 *   **docs** - la documentación de MkDocs en inglés y en español
 *   **tests** - las pruebas del paquete de Python
 

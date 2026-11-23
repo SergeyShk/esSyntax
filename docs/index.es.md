@@ -49,7 +49,7 @@
 
 Una oración pasa por tres pasos: el segmentador anySeg divide el texto en tokens y sus palabras (`del` es `de` + `el`), el analizador morfológico esMorph da a cada palabra su categoría gramatical y sus rasgos - género, número, persona, modo - y esSyntax usa las palabras y sus etiquetas para encontrar de qué palabra depende cada palabra y cómo: el sujeto depende del verbo, un determinante de su sustantivo, una preposición de la palabra que introduce.
 
-<!-- figure: how esSyntax parses a sentence, from the text to the tree (docs/img/pipeline.svg, pipeline.es.svg) -->
+![Cómo esSyntax analiza una oración: el texto, las palabras, las categorías y los rasgos, el árbol de dependencias](img/pipeline.svg)
 
 ## Instalación
 

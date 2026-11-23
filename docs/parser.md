@@ -29,7 +29,9 @@ Exceptions:
     [('La', 2, 'det'), ('gata', 6, 'nsubj'), ('que', 4, 'obj'), ('vi', 2, 'acl:relcl'), ('ayer', 4, 'advmod'), ('dormía', 0, 'root'), ('en', 9, 'case'), ('el', 9, 'det'), ('porche', 6, 'obl'), ('.', 6, 'punct')]
     ```
 
-<!-- figure: the parse of a sentence as arcs from the head to the dependent (docs/img/arcs.svg, arcs.es.svg) -->
+The parse of another sentence as arcs from the head to the dependent, with school names of the relations next to the UD labels (the match is approximate: in UD `del vecino` is a noun modifier `nmod` of `hija`, and the preposition depends on its noun as `case`):
+
+![The dependency arcs of «Ayer la hija del vecino compró un coche nuevo.» with the names of the relations](img/arcs.svg)
 
 ## Parameters { #parameters }
 

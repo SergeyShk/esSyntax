@@ -78,7 +78,21 @@ echo "Mi madre lava la ropa." | essyntax
 
 The options, the input and the output of the command are on the [essyntax command](https://sergeyshk.github.io/esSyntax/cli/) page.
 
-<!-- comparison: the section "Quality and speed" with the table of LAS on AnCora, GSD, PUD and COSER test and words per second against other parsers (docs/performance.md) goes here -->
+## Quality and speed
+
+LAS from raw text on the test parts of the UD 2.19 treebanks (official CoNLL 2018 script, punctuation included), %, and speed in one thread:
+
+| System | AnCora | GSD | PUD | COSER | Words/s |
+| :----- | -----: | --: | --: | ----: | ------: |
+| esSyntax | 89.25 | 80.95 | 81.97 | 65.52 | 31,253 |
+| spaCy es_core_news_sm | 79.77 | 70.48 | 72.82 | 59.24 | 34,069 |
+| spaCy es_dep_news_trf | 85.01 | 74.45 | 75.85 | 62.73 | 1,332 |
+| Stanza | 89.19 | 84.89 | 83.99 | 65.43 | 1,143 |
+| Stanza ancora | **90.90** | 80.20 | 81.41 | **66.76** | 1,146 |
+| Stanza accurate | 90.67 | **87.14** | **85.17** | 66.47 | 424 |
+| UDPipe 1 | 78.73 | 68.48 | 72.19 | 58.24 | 6,155 |
+
+The esSyntax model is trained on AnCora and GSD and parses in the conventions of AnCora; Stanza and Stanza accurate are trained on AnCora and GSD, whose conventions PUD shares, the other models on AnCora. Speed - one thread on the gold words of AnCora test, together with the tagging (for esSyntax - by esMorph); the other systems, the metrics and the conditions of the measurement are on the [Comparison](https://sergeyshk.github.io/esSyntax/performance/) page.
 
 ## Development
 
@@ -115,7 +129,7 @@ Bug reports, ideas and pull requests are welcome, in English or Spanish - the [i
 *   **crates/essyntax-py** - the Python module `essyntax._essyntax` built with PyO3
 *   **python/essyntax** - the Python package and the `essyntax` command
 *   **data** - the model and the check of its forward pass in Rust against PyTorch
-*   **scripts** - exporting the UD treebanks and training the model, checking the installed package before publishing and the licenses of the crates of the module
+*   **scripts** - exporting the UD treebanks and training the model, the comparison with other parsers, the figures of the documentation, checking the installed package before publishing and the licenses of the crates of the module
 *   **docs** - MkDocs documentation in English and Spanish
 *   **tests** - tests of the Python package
 

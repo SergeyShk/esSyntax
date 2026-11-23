@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 774 700" width="774" height="700" font-family="PT Sans, Source Sans Pro, Arial, sans-serif" role="img">
 <rect width="774" height="700" rx="12" fill="white"/>
-<text x="447.0" y="30.0" font-size="15" fill="#c62828" font-weight="bold" text-anchor="middle">Candidato a regente</text>
+<text x="447.0" y="30.0" font-size="15" fill="#c62828" font-weight="bold" text-anchor="middle">Candidato a núcleo</text>
 <text x="30.0" y="369.0" font-size="15" fill="#c62828" font-weight="bold" text-anchor="start">Palabra</text>
 <text x="183.0" y="86.0" font-size="14" fill="#212121" font-weight="bold" text-anchor="middle">RAÍZ</text>
 <text x="249.0" y="86.0" font-size="14" fill="#212121" font-weight="bold" text-anchor="middle">Vi</text>
@@ -108,6 +108,6 @@
 <rect x="547" y="563" width="64" height="64" fill="#c62828" fill-opacity="0.000"/>
 <rect x="613" y="563" width="64" height="64" fill="#c62828" fill-opacity="0.001"/>
 <rect x="679" y="563" width="64" height="64" fill="#eeeeee"/>
-<text x="30.0" y="662.0" font-size="14" fill="#6b6b6b" text-anchor="start">P(regente | palabra): softmax de las puntuaciones biafines por fila;</text>
-<text x="30.0" y="680.0" font-size="14" fill="#6b6b6b" text-anchor="start">el marco señala el regente en el árbol del análisis</text>
+<text x="30.0" y="662.0" font-size="14" fill="#6b6b6b" text-anchor="start">P(núcleo | palabra): softmax de las puntuaciones biafines por fila;</text>
+<text x="30.0" y="680.0" font-size="14" fill="#6b6b6b" text-anchor="start">el marco señala el núcleo en el árbol del análisis</text>
 </svg>
