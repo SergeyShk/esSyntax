@@ -59,6 +59,7 @@ cache-keys = [
     { file = "Cargo.toml" },
     { file = "Cargo.lock" },
     { file = "crates/**/*" },
+    { file = "data/es-syntax.bin" },
 ]
 
 [tool.uv.dependency-groups]

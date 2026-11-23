@@ -20,7 +20,7 @@
 **esSyntax** es un analizador sintáctico de dependencias del español: un núcleo en Rust con API para Python. Para cada palabra de una oración el analizador encuentra la palabra de la que depende y la relación entre ambas en la anotación de [Universal Dependencies](https://universaldependencies.org/).
 
 > [!WARNING]
-> En desarrollo: por ahora el paquete contiene solo la estructura básica; el analizador llegará en las próximas versiones. Las versiones `0.1.0.devN` se publican en TestPyPI.
+> En desarrollo: la API puede cambiar hasta la versión 0.1.0. Las versiones `0.1.0.devN` se publican en TestPyPI.
 
 ## Instalación
 
@@ -31,6 +31,19 @@ pip install essyntax
 ```
 
 Hay paquetes precompilados para Linux (también Alpine), macOS y Windows y para Python 3.14t y 3.15t sin GIL; para instalarlos no hace falta Rust. En otras plataformas pip compila el paquete desde el código fuente, lo que requiere [Rust](https://www.rust-lang.org/tools/install) 1.88 o superior. Más detalles en la página de [instalación](https://sergeyshk.github.io/esSyntax/es/installation/).
+
+## Inicio rápido
+
+```python
+from essyntax import Parser
+
+parser = Parser()
+document = parser.parse_text("Voy al cine.")
+print([(word.form, word.head, word.deprel) for word in document.words])
+# [('Voy', 0, 'root'), ('a', 4, 'case'), ('el', 4, 'det'), ('cine', 1, 'obl'), ('.', 1, 'punct')]
+```
+
+`parse_text` divide el texto en oraciones, tokens y palabras con el segmentador [anySeg](https://github.com/SergeyShk/anySeg), da a las palabras su lema, categoría gramatical y rasgos con el analizador morfológico [esMorph](https://github.com/SergeyShk/esMorph), que además divide un verbo con clíticos en sus palabras (`pónganselo` - `pongan`, `se`, `lo`), y encuentra la palabra de la que depende cada palabra (su número desde 1, 0 para la raíz) y la relación entre ambas; el documento conserva los tokens multipalabra (`al` - `a`, `el`). `parser.annotate(document)` analiza un documento de anySeg que ya tiene su morfología, `parser.parse(words, upos, feats)` analiza una oración con categorías gramaticales y rasgos propios, y `parser.parse_many(sentences)` analiza muchas oraciones a la vez.
 
 ## Desarrollo
 

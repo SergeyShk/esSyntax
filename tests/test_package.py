@@ -23,7 +23,7 @@ def test_version():
 
 def test_metadata():
     assert "dependency parser" in essyntax.__description__
-    assert "__version__" in essyntax.__all__
+    assert {"Parser", "__version__"} <= set(essyntax.__all__)
     assert essyntax.__all__ == sorted(essyntax.__all__)
 
 
@@ -38,6 +38,13 @@ def test_crate_version():
     with (ROOT / "pyproject.toml").open("rb") as file:
         package = tomllib.load(file)["project"]["version"]
     assert crate == re.sub(r"\.dev(\d+)$", r"-dev.\1", package)
+
+
+def test_model_cache_key():
+    # uv rebuilds the module when the model embedded in it changes
+    with (ROOT / "pyproject.toml").open("rb") as file:
+        keys = tomllib.load(file)["tool"]["uv"]["cache-keys"]
+    assert {"file": "data/es-syntax.bin"} in keys
 
 
 def test_extension():
@@ -68,12 +75,15 @@ def test_wheel_contents(tmp_path):
     (wheel,) = tmp_path.glob("*.whl")
     assert ("-abi3-" in wheel.name) != bool(sysconfig.get_config_var("Py_GIL_DISABLED"))
     with zipfile.ZipFile(wheel) as archive:
-        names = set(archive.namelist())
+        sizes = {info.filename: info.file_size for info in archive.infolist()}
+    names = set(sizes)
     assert "essyntax/py.typed" in names
     modules = [
         name for name in names if re.fullmatch(r"essyntax/_essyntax(\.[\w-]+)?\.(so|pyd)", name)
     ]
     assert len(modules) == 1
+    # The model is embedded in the module, not a file of the package
+    assert sizes[modules[0]] > (ROOT / "data" / "es-syntax.bin").stat().st_size
     assert all(name.startswith(("essyntax/", "essyntax-")) for name in names)
     licenses = {name.rsplit("/", 1)[1] for name in names if "/licenses/" in name}
     assert licenses == {"LICENSE.txt", "LICENSE-MODEL.txt", "THIRD-PARTY-NOTICES.txt"}
