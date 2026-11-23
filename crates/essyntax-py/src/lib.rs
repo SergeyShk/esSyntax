@@ -397,21 +397,37 @@ struct Parser {
     key: Option<FileKey>,
     /// The relations of the model as Python strings: the relation of a word is not made anew
     relations: Vec<Py<PyString>>,
-    /// The anySeg segmenter and the esMorph analyzer of parse_text: made on the first call
-    tools: OnceLock<(Py<PyAny>, Py<PyAny>)>,
+    /// The anySeg segmenter of parse_text: made on the first call without an own one
+    segmenter: OnceLock<Py<PyAny>>,
+    /// The esMorph analyzer of parse_text: made on the first call without an own one
+    analyzer: OnceLock<Py<PyAny>>,
+}
+
+/// The object of `cell` or, the first time, the one `make` gives; it is made outside the cell, as
+/// making runs Python code
+fn kept<'py>(
+    py: Python<'py>,
+    cell: &OnceLock<Py<PyAny>>,
+    make: impl FnOnce() -> PyResult<Bound<'py, PyAny>>,
+) -> PyResult<Bound<'py, PyAny>> {
+    if let Some(value) = cell.get() {
+        return Ok(value.bind(py).clone());
+    }
+    let value = make()?;
+    Ok(cell.get_or_init(|| value.unbind()).bind(py).clone())
 }
 
 impl Parser {
-    fn tools<'py>(&self, py: Python<'py>) -> PyResult<(Bound<'py, PyAny>, Bound<'py, PyAny>)> {
-        if let Some((segmenter, analyzer)) = self.tools.get() {
-            return Ok((segmenter.bind(py).clone(), analyzer.bind(py).clone()));
-        }
-        let segmenter = py.import("anyseg")?.getattr("Segmenter")?.call1(("es",))?;
-        let analyzer = py.import("esmorph")?.getattr("Analyzer")?.call0()?;
-        let (segmenter, analyzer) = self
-            .tools
-            .get_or_init(|| (segmenter.unbind(), analyzer.unbind()));
-        Ok((segmenter.bind(py).clone(), analyzer.bind(py).clone()))
+    fn segmenter<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
+        kept(py, &self.segmenter, || {
+            py.import("anyseg")?.getattr("Segmenter")?.call1(("es",))
+        })
+    }
+
+    fn analyzer<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
+        kept(py, &self.analyzer, || {
+            py.import("esmorph")?.getattr("Analyzer")?.call0()
+        })
     }
 
     /// The relations of a sentence for Python: the head and the relation, with `probs` also their
@@ -462,7 +478,8 @@ impl Parser {
             path,
             key,
             relations,
-            tools: OnceLock::new(),
+            segmenter: OnceLock::new(),
+            analyzer: OnceLock::new(),
         })
     }
 
@@ -793,8 +810,8 @@ impl Parser {
     ///     context and splits into words the tokens the segmenter leaves whole (`pónganselo` -
     ///     `pongan`, `se`, `lo`), then every word gets its head and relation (annotate); the
     ///     document keeps the multiword tokens. The default segmenter and analyzer are made on
-    ///     the first call and used again; own ones - for example, with own abbreviations or
-    ///     words - are given in the arguments
+    ///     the first call without an own one and used again; own ones - for example, with own
+    ///     abbreviations or words - are given in the arguments
     ///
     /// Arguments:
     ///     text (str): The text
@@ -846,15 +863,13 @@ impl Parser {
                 return Err(type_error(what, tool));
             }
         }
-        let (segmenter, analyzer) = match (segmenter, analyzer) {
-            (Some(segmenter), Some(analyzer)) => (segmenter, analyzer),
-            (segmenter, analyzer) => {
-                let (default_segmenter, default_analyzer) = self.tools(py)?;
-                (
-                    segmenter.unwrap_or(default_segmenter),
-                    analyzer.unwrap_or(default_analyzer),
-                )
-            }
+        let segmenter = match segmenter {
+            Some(segmenter) => segmenter,
+            None => self.segmenter(py)?,
+        };
+        let analyzer = match analyzer {
+            Some(analyzer) => analyzer,
+            None => self.analyzer(py)?,
         };
         let document = segmenter.call_method1(intern!(py, "segment"), (text,))?;
         if !is_document(&document)? {

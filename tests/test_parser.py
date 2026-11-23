@@ -9,6 +9,8 @@ import weakref
 import zlib
 from pathlib import Path
 
+import anyseg
+import esmorph
 import pytest
 from anyseg import Document, Segmenter, read_conllu
 from esmorph import Analyzer
@@ -454,6 +456,26 @@ def test_parse_text_with_own_tools(parser):
         TypeError, match="annotate must return an anySeg document or None, not str"
     ):
         parser.parse_text(text, analyzer=Wrong())
+
+
+def test_parse_text_makes_only_missing_tools(monkeypatch):
+    # With an own analyzer the default one is not made, nor the default segmenter with an own one
+    text = "El gato duerme."
+    segmenter, analyzer = Segmenter("es"), Analyzer()
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("a default tool is made")
+
+    with_analyzer, with_segmenter = Parser(), Parser()
+    with monkeypatch.context() as patch:
+        patch.setattr(esmorph, "Analyzer", forbidden)
+        expected = with_analyzer.parse_text(text, analyzer=analyzer).to_conllu()
+    with monkeypatch.context() as patch:
+        patch.setattr(anyseg, "Segmenter", forbidden)
+        assert with_segmenter.parse_text(text, segmenter=segmenter).to_conllu() == expected
+    # The missing default is made later, when it is needed
+    assert with_analyzer.parse_text(text).to_conllu() == expected
+    assert with_segmenter.parse_text(text).to_conllu() == expected
 
 
 def test_model_from_path(tmp_path, parser):
