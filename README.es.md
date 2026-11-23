@@ -10,10 +10,15 @@
 
 <p align="center">
   <a href="https://sergeyshk.github.io/esSyntax/es/">Documentación</a> ·
+  <a href="https://pypi.org/project/essyntax/">PyPI</a> ·
+  <a href="https://crates.io/crates/essyntax">crates.io</a> ·
   <a href="https://github.com/SergeyShk/esSyntax/blob/master/README.md">English</a>
 </p>
 
 <p align="center">
+  <a href="https://pypi.org/project/essyntax/"><img src="https://img.shields.io/pypi/v/essyntax?logo=pypi&logoColor=FFE873" alt="Versión"></a>
+  <a href="https://pypi.org/project/essyntax/"><img src="https://img.shields.io/pypi/pyversions/essyntax.svg?logo=python&logoColor=FFE873" alt="Versiones de Python compatibles"></a>
+  <a href="https://crates.io/crates/essyntax"><img src="https://img.shields.io/crates/v/essyntax?logo=rust" alt="Crate"></a>
   <a href="https://github.com/SergeyShk/esSyntax/actions/workflows/ci.yml"><img src="https://github.com/SergeyShk/esSyntax/actions/workflows/ci.yml/badge.svg" alt="Build"></a>
   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff"></a>
   <a href="https://github.com/SergeyShk/esSyntax/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/sergeyshk/essyntax.svg" alt="Licencia"></a>
@@ -28,9 +33,6 @@
 * **[El comando essyntax](https://sergeyshk.github.io/esSyntax/es/cli/)** - CoNLL-U a partir de texto o de CoNLL-U con categorías gramaticales y rasgos, archivos y flujos por párrafos
 * **[Modelo](https://sergeyshk.github.io/esSyntax/es/model/)** - una BiLSTM sobre las palabras y sus etiquetas de esMorph, núcleos biafines y un árbol con una sola raíz; 2.9 MB dentro del paquete
 * **[Comparación](https://sergeyshk.github.io/esSyntax/es/performance/)** - calidad y velocidad frente a otros analizadores sintácticos del español
-
-> [!WARNING]
-> En desarrollo: la API puede cambiar hasta la versión 0.1.0. Las versiones `0.1.0.devN` se publican en TestPyPI.
 
 ## Instalación
 

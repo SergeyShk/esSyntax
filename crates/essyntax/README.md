@@ -18,9 +18,17 @@ Fast Spanish dependency parser written in Rust, the core of the
   of the model.
 - Sentences of close length are parsed four at once: `Parser::parse_many`.
 
-The model is not part of the crate: the parser reads it from a file, such as `data/es-syntax.bin` of the repository,
-trained on the treebanks UD Spanish AnCora and GSD (CC BY-SA 4.0,
-[LICENSE-MODEL.txt](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE-MODEL.txt)).
+## Installation
+
+```toml
+[dependencies]
+essyntax = "0.1"
+```
+
+The model is not part of the crate: the parser reads it from a file. The model of version 0.1 is the file
+[`data/es-syntax.bin`](https://github.com/SergeyShk/esSyntax/raw/0.1.0/data/es-syntax.bin) of the repository at the tag
+0.1.0, trained on the treebanks UD Spanish AnCora and GSD (CC BY-SA 4.0,
+[LICENSE-MODEL.txt](https://github.com/SergeyShk/esSyntax/blob/0.1.0/LICENSE-MODEL.txt)).
 
 ## Example
 

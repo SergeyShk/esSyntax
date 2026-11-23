@@ -6,6 +6,8 @@ authors:
   - family-names: Shkarin
     given-names: Sergey
     email: kouki.sergey@gmail.com
+version: 0.1.0
+date-released: 2026-11-23
 repository-code: "https://github.com/SergeyShk/esSyntax"
 url: "https://sergeyshk.github.io/esSyntax/"
 license: MIT
@@ -16,4 +18,4 @@ keywords:
   - dependency parsing
   - universal dependencies
   - rust
-abstract: "esSyntax is a dependency parser of Spanish with a Rust core and a Python API: for every word of a sentence it finds the head and the Universal Dependencies relation. Work in progress."
+abstract: "esSyntax is a dependency parser of Spanish with a Rust core and a Python API: for every word of a sentence it finds the head and the Universal Dependencies relation. A BiLSTM over the words, their endings and the esMorph parts of speech and features scores the arcs with a biaffine scorer and builds the maximum spanning tree with one root, non-projective trees included; the relations are chosen by the pair of the dependent and its head, and the parser gives the probabilities of the head and the relation of every word. The model is trained on the AnCora and GSD treebanks of UD 2.19 tagged by esMorph, and its int8 weights are distributed under CC BY-SA 4.0. Raw text is split into sentences and words by the anySeg segmenter and tagged by the esMorph morphological analyzer; sentences are parsed without the GIL. The essyntax command parses text and CoNLL-U files into CoNLL-U."
