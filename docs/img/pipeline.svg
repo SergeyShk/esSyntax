@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 845 618" width="845" height="618" font-family="PT Sans, Source Sans Pro, Arial, sans-serif" role="img">
+<rect width="845" height="618" rx="12" fill="white"/>
+<text x="20.0" y="30.0" font-size="15" fill="#c62828" font-weight="bold" text-anchor="start">1. Text</text>
+<text x="20.0" y="60.0" font-size="20" fill="#212121" text-anchor="start">Ayer la hija <tspan fill="#c62828" font-weight="bold">del</tspan> vecino compró un coche nuevo.</text>
+<text x="20.0" y="100.0" font-size="15" fill="#c62828" font-weight="bold" text-anchor="start">2. anySeg splits the text into words: «del» is «de» + «el»</text>
+<rect x="15.0" y="138" width="56.3" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="43.2" y="159.0" font-size="18" fill="#212121" text-anchor="middle">Ayer</text>
+<rect x="89.8" y="138" width="36.2" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="107.9" y="159.0" font-size="18" fill="#212121" text-anchor="middle">la</text>
+<rect x="144.4" y="138" width="56.3" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="172.6" y="159.0" font-size="18" fill="#212121" text-anchor="middle">hija</text>
+<rect x="222.9" y="138" width="36.2" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="241.0" y="159.0" font-size="18" fill="#212121" text-anchor="middle">de</text>
+<rect x="285.6" y="138" width="36.2" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="303.7" y="159.0" font-size="18" fill="#212121" text-anchor="middle">el</text>
+<rect x="340.3" y="138" width="76.5" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="378.5" y="159.0" font-size="18" fill="#212121" text-anchor="middle">vecino</text>
+<rect x="430.8" y="138" width="76.5" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="469.0" y="159.0" font-size="18" fill="#212121" text-anchor="middle">compró</text>
+<rect x="525.7" y="138" width="36.2" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="543.8" y="159.0" font-size="18" fill="#212121" text-anchor="middle">un</text>
+<rect x="594.8" y="138" width="66.4" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="628.0" y="159.0" font-size="18" fill="#212121" text-anchor="middle">coche</text>
+<rect x="689.6" y="138" width="66.4" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="722.8" y="159.0" font-size="18" fill="#212121" text-anchor="middle">nuevo</text>
+<rect x="786.8" y="138" width="26.1" height="30" rx="6" fill="white" stroke="#ef5350" stroke-width="1.5"/>
+<text x="799.9" y="159.0" font-size="18" fill="#212121" text-anchor="middle">.</text>
+<path fill="none" stroke="#c62828" stroke-width="1.5" d="M222.9 133L222.9 127L321.8 127L321.8 133"/>
+<text x="272.3" y="121.0" font-size="15" fill="#c62828" font-weight="bold" text-anchor="middle">del</text>
+<text x="20.0" y="200.0" font-size="15" fill="#c62828" font-weight="bold" text-anchor="start">3. esMorph gives every word its part of speech and features</text>
+<text x="43.2" y="228.0" font-size="18" fill="#212121" text-anchor="middle">Ayer</text>
+<text x="43.2" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">adv.</text>
+<text x="43.2" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle"></text>
+<text x="107.9" y="228.0" font-size="18" fill="#212121" text-anchor="middle">la</text>
+<text x="107.9" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">det.</text>
+<text x="107.9" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle">fem. sing.</text>
+<text x="172.6" y="228.0" font-size="18" fill="#212121" text-anchor="middle">hija</text>
+<text x="172.6" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">noun</text>
+<text x="172.6" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle">fem. sing.</text>
+<text x="241.0" y="228.0" font-size="18" fill="#212121" text-anchor="middle">de</text>
+<text x="241.0" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">prep.</text>
+<text x="241.0" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle"></text>
+<text x="303.7" y="228.0" font-size="18" fill="#212121" text-anchor="middle">el</text>
+<text x="303.7" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">det.</text>
+<text x="303.7" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle">masc. sing.</text>
+<text x="378.5" y="228.0" font-size="18" fill="#212121" text-anchor="middle">vecino</text>
+<text x="378.5" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">noun</text>
+<text x="378.5" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle">masc. sing.</text>
+<text x="469.0" y="228.0" font-size="18" fill="#212121" text-anchor="middle">compró</text>
+<text x="469.0" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">verb</text>
+<text x="469.0" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle">past</text>
+<text x="543.8" y="228.0" font-size="18" fill="#212121" text-anchor="middle">un</text>
+<text x="543.8" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">det.</text>
+<text x="543.8" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle">masc. sing.</text>
+<text x="628.0" y="228.0" font-size="18" fill="#212121" text-anchor="middle">coche</text>
+<text x="628.0" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">noun</text>
+<text x="628.0" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle">masc. sing.</text>
+<text x="722.8" y="228.0" font-size="18" fill="#212121" text-anchor="middle">nuevo</text>
+<text x="722.8" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">adj.</text>
+<text x="722.8" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle">masc. sing.</text>
+<text x="799.9" y="228.0" font-size="18" fill="#212121" text-anchor="middle">.</text>
+<text x="799.9" y="246.0" font-size="12" fill="#c62828" text-anchor="middle">punct.</text>
+<text x="799.9" y="260.0" font-size="12" fill="#6b6b6b" text-anchor="middle"></text>
+<text x="20.0" y="300.0" font-size="15" fill="#c62828" font-weight="bold" text-anchor="start">4. esSyntax finds the word every word depends on and names the relation</text>
+<g transform="translate(0,578)">
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M166.6 -8C172.6 -84.0 107.9 -84.0 107.9 -17"/>
+<path d="M100.9 -19.2L114.9 -19.2L107.9 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M372.5 -8C378.5 -84.0 303.7 -84.0 303.7 -17"/>
+<path d="M296.7 -19.2L310.7 -19.2L303.7 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M622.0 -8C628.0 -84.0 543.8 -84.0 543.8 -17"/>
+<path d="M536.8 -19.2L550.8 -19.2L543.8 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M634.0 -8C628.0 -84.0 722.8 -84.0 722.8 -17"/>
+<path d="M715.8 -19.2L729.8 -19.2L722.8 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M372.5 -8C378.5 -130.0 241.0 -130.0 241.0 -17"/>
+<path d="M234.0 -19.2L248.0 -19.2L241.0 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M475.0 -8C469.0 -130.0 628.0 -130.0 628.0 -17"/>
+<path d="M621.0 -19.2L635.0 -19.2L628.0 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M178.6 -8C172.6 -176.0 378.5 -176.0 378.5 -17"/>
+<path d="M371.5 -19.2L385.5 -19.2L378.5 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M463.0 -8C469.0 -222.0 172.6 -222.0 172.6 -17"/>
+<path d="M165.6 -19.2L179.6 -19.2L172.6 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M475.0 -8C469.0 -222.0 799.9 -222.0 799.9 -17"/>
+<path d="M792.9 -19.2L806.9 -19.2L799.9 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M463.0 -8C469.0 -314.0 43.2 -314.0 43.2 -17"/>
+<path d="M36.2 -19.2L50.2 -19.2L43.2 -8.0Z" fill="#ef5350"/>
+<rect x="96.8" y="-85.0" width="86.8" height="30" rx="5" fill="white"/>
+<text x="140.2" y="-71.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">determiner</text>
+<text x="140.2" y="-59.0" font-size="10" fill="#6b6b6b" text-anchor="middle">det</text>
+<rect x="297.7" y="-85.0" width="86.8" height="30" rx="5" fill="white"/>
+<text x="341.1" y="-71.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">determiner</text>
+<text x="341.1" y="-59.0" font-size="10" fill="#6b6b6b" text-anchor="middle">det</text>
+<rect x="542.5" y="-85.0" width="86.8" height="30" rx="5" fill="white"/>
+<text x="585.9" y="-71.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">determiner</text>
+<text x="585.9" y="-59.0" font-size="10" fill="#6b6b6b" text-anchor="middle">det</text>
+<rect x="639.3" y="-85.0" width="72.2" height="30" rx="5" fill="white"/>
+<text x="675.4" y="-71.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">modifier</text>
+<text x="675.4" y="-59.0" font-size="10" fill="#6b6b6b" text-anchor="middle">amod</text>
+<rect x="262.7" y="-119.5" width="94.1" height="30" rx="5" fill="white"/>
+<text x="309.7" y="-105.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">preposition</text>
+<text x="309.7" y="-93.5" font-size="10" fill="#6b6b6b" text-anchor="middle">case</text>
+<rect x="494.2" y="-119.5" width="108.6" height="30" rx="5" fill="white"/>
+<text x="548.5" y="-105.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">direct object</text>
+<text x="548.5" y="-93.5" font-size="10" fill="#6b6b6b" text-anchor="middle">obj</text>
+<rect x="214.0" y="-154.0" width="123.2" height="30" rx="5" fill="white"/>
+<text x="275.6" y="-140.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">noun complement</text>
+<text x="275.6" y="-128.0" font-size="10" fill="#6b6b6b" text-anchor="middle">nmod</text>
+<rect x="288.3" y="-188.5" width="65.0" height="30" rx="5" fill="white"/>
+<text x="320.8" y="-174.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">subject</text>
+<text x="320.8" y="-162.5" font-size="10" fill="#6b6b6b" text-anchor="middle">nsubj</text>
+<rect x="587.4" y="-188.5" width="94.1" height="30" rx="5" fill="white"/>
+<text x="634.4" y="-174.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">punctuation</text>
+<text x="634.4" y="-162.5" font-size="10" fill="#6b6b6b" text-anchor="middle">punct</text>
+<rect x="216.3" y="-257.5" width="79.5" height="30" rx="5" fill="white"/>
+<text x="256.1" y="-243.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">adverbial</text>
+<text x="256.1" y="-231.5" font-size="10" fill="#6b6b6b" text-anchor="middle">advmod</text>
+<text x="43.2" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">Ayer</text>
+<text x="107.9" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">la</text>
+<text x="172.6" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">hija</text>
+<text x="241.0" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">de</text>
+<text x="303.7" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">el</text>
+<text x="378.5" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">vecino</text>
+<text x="469.0" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">compró</text>
+<text x="543.8" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">un</text>
+<text x="628.0" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">coche</text>
+<text x="722.8" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">nuevo</text>
+<text x="799.9" y="18.0" font-size="18" fill="#212121" font-weight="bold" text-anchor="middle">.</text>
+</g>
+</svg>

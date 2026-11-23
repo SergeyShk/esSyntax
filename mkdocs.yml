@@ -7,11 +7,16 @@ nav:
     - Home:
       - About: index.md
       - Installation: installation.md
+      - Model: model.md
+      - Comparison: performance.md
       - Authors: authors.md
+    - Parser: parser.md
+    - The essyntax command: cli.md
 
 theme:
   name: material
   language: en
+  favicon: img/favicon.png
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -79,7 +84,11 @@ plugins:
             Home: Inicio
             About: Acerca de
             Installation: Instalación
+            Model: Modelo
+            Comparison: Comparación
             Authors: Autores
+            Parser: Analizador
+            The essyntax command: El comando essyntax
 
 extra:
   social:

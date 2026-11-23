@@ -32,3 +32,11 @@ pip install essyntax
 ```
 
 El entorno de desarrollo se describe en [CONTRIBUTING.md](https://github.com/SergeyShk/esSyntax/blob/master/CONTRIBUTING.md).
+
+## Rust { #rust }
+
+A partir de la versión 0.1.0 el núcleo del analizador se publica en crates.io como el crate [`essyntax`](https://crates.io/crates/essyntax), y la documentación de la API está en [docs.rs](https://docs.rs/essyntax). El modelo no forma parte del crate: descargue el archivo [`data/es-syntax.bin`](https://github.com/SergeyShk/esSyntax/raw/0.1.0/data/es-syntax.bin) del repositorio en la etiqueta de la versión del crate (la licencia del modelo es CC BY-SA 4.0) y pase su ruta a `Parser::from_path`.
+
+``` bash
+cargo add essyntax
+```
