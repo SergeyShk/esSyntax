@@ -4,9 +4,6 @@
 
 **esSyntax** is a dependency parser of Spanish: a Rust core with a Python API. For every word of a sentence the parser finds its head and the relation between them in the [Universal Dependencies](https://universaldependencies.org/) annotation. The [anySeg](https://sergeyshk.github.io/anySeg/) segmenter splits the text into sentences and words, and the [esMorph](https://sergeyshk.github.io/esMorph/) morphological analyzer gives the parts of speech and features.
 
-!!! warning "Work in progress"
-    The API may change until version 0.1.0. Versions `0.1.0.devN` are published on TestPyPI.
-
 ## Features
 
 <div class="grid cards" markdown>

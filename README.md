@@ -10,10 +10,15 @@
 
 <p align="center">
   <a href="https://sergeyshk.github.io/esSyntax/">Documentation</a> ·
+  <a href="https://pypi.org/project/essyntax/">PyPI</a> ·
+  <a href="https://crates.io/crates/essyntax">crates.io</a> ·
   <a href="https://github.com/SergeyShk/esSyntax/blob/master/README.es.md">Español</a>
 </p>
 
 <p align="center">
+  <a href="https://pypi.org/project/essyntax/"><img src="https://img.shields.io/pypi/v/essyntax?logo=pypi&logoColor=FFE873" alt="Version"></a>
+  <a href="https://pypi.org/project/essyntax/"><img src="https://img.shields.io/pypi/pyversions/essyntax.svg?logo=python&logoColor=FFE873" alt="Supported Python versions"></a>
+  <a href="https://crates.io/crates/essyntax"><img src="https://img.shields.io/crates/v/essyntax?logo=rust" alt="Crate"></a>
   <a href="https://github.com/SergeyShk/esSyntax/actions/workflows/ci.yml"><img src="https://github.com/SergeyShk/esSyntax/actions/workflows/ci.yml/badge.svg" alt="Build"></a>
   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff"></a>
   <a href="https://github.com/SergeyShk/esSyntax/blob/master/LICENSE.txt"><img src="https://img.shields.io/github/license/sergeyshk/essyntax.svg" alt="License"></a>
@@ -28,9 +33,6 @@
 * **[The essyntax command](https://sergeyshk.github.io/esSyntax/cli/)** - CoNLL-U from text or from CoNLL-U with parts of speech and features, files and streams by paragraphs
 * **[Model](https://sergeyshk.github.io/esSyntax/model/)** - a BiLSTM over the words and their esMorph tags, biaffine heads and a tree with one root; 2.9 MB built into the package
 * **[Comparison](https://sergeyshk.github.io/esSyntax/performance/)** - quality and speed compared with other parsers of Spanish
-
-> [!WARNING]
-> Work in progress: the API may change until version 0.1.0. Versions `0.1.0.devN` are published on TestPyPI.
 
 ## Installation
 
