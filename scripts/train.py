@@ -26,17 +26,18 @@ Description:
     word-start mark, the UPOS, the sum of the embeddings of its first 12 pairs of features and
     the embedding of the treebank of its sentence, so the annotation conventions of AnCora and
     GSD do not mix; a BiLSTM of two layers of 128; the head is a biaffine score and the Chu - Liu
-    - Edmonds tree with one root, the relation is a linear score of the pair "dependent - head".
-    A dev part is parsed with the marker of its treebank: the training point is chosen by LAS on
-    AnCora dev, GSD dev is a control. The written model parses every text as AnCora: the marker
-    of AnCora (`MARKER`) goes into the bias of the first BiLSTM layer, and the format of the core
-    has no marker. Then the weights are quantized to int8 by rows and written in the format of
-    the core (`--output`, the entry `sources` describes the sources and the LAS on dev:
-    `dev_las` at the training point, `dev_las_int8` of the written model); `--check` gets the
-    parse of the first sentences of AnCora dev by the written model in PyTorch, the reference of
-    the test of the crate that checks the forward pass in Rust. The versions of the packages are
-    pinned in train.py.lock. On MPS and GPU training is non-deterministic: a rerun gives close but
-    not the same weights
+    - Edmonds tree with one root, the relation is a linear score of the pair "dependent - head";
+    as in the core, `root` is the relation of the word whose head is the root and only of it. In
+    training a dev part is parsed with the marker of its treebank: the training point is chosen
+    by LAS on AnCora dev, GSD dev is a control, and the log shows both. The written model parses
+    every text as AnCora: the marker of AnCora (`MARKER`) goes into the bias of the first BiLSTM
+    layer, and the format of the core has no marker. Then the weights are quantized to int8 by
+    rows and written in the format of the core (`--output`; the entry `sources` describes the
+    sources and `dev_las`, the LAS of the written model on every dev part, as the core parses
+    it); `--check` gets the parse of the first sentences of AnCora dev by the written model in
+    PyTorch, the reference of the test of the crate that checks the forward pass in Rust. The
+    versions of the packages are pinned in train.py.lock. On MPS and GPU training is
+    non-deterministic: a rerun gives close but not the same weights
 
 Example:
     uv run --python 3.13 scripts/train.py target/ud --output data/es-syntax.bin --check data/check.conllu
@@ -572,7 +573,8 @@ def predict(
     model: Parser, vocab: Vocab, sentences: list[Sentence], device: torch.device
 ) -> list[tuple[list[int], list[str]]]:
     """
-    Heads and relations of sentences
+    Heads and relations of sentences, as in the core: `root` is the relation of the word whose head
+    is the root and only of it
 
     Arguments:
         model (Parser): Model
@@ -584,6 +586,7 @@ def predict(
         list[tuple[list[int], list[str]]]: Heads and relations of every sentence
     """
     model.eval()
+    root = vocab.relation["root"]
     out: list[tuple[list[int], list[str]]] = [([], [])] * len(sentences)
     with torch.no_grad():
         for idx in batches(sentences, 4000, None):
@@ -596,7 +599,10 @@ def predict(
             for k in range(len(idx)):
                 n = int(lens[k])
                 heads[k, :n] = torch.tensor(tree(logp[k, :n, :n]))
-            labels = model.labels(rel_dep, rel_head, heads.to(device)).argmax(-1).cpu()
+            scores = model.labels(rel_dep, rel_head, heads.to(device))
+            scores[..., root] = float("-inf")
+            labels = scores.argmax(-1).cpu()
+            labels[heads == 0] = root
             for k, i in enumerate(idx):
                 n = int(lens[k])
                 out[i] = (
@@ -905,11 +911,16 @@ def main() -> None:
         flush=True,
     )
     best = train(model, vocab, sentences, dev, args, device)
+    print(
+        "LAS dev at the training point, f32, every part with the marker of its treebank: "
+        + ", ".join(f"{name} {value:.2f}" for name, value in best.items()),
+        flush=True,
+    )
     model = model.cpu()
     # The model that the core computes: the marker of MARKER in the bias, int8 weights
     fold(model, vocab, MARKER)
     quantize_(model)
-    quantized = {
+    written = {
         name: round(las(s, predict(model, vocab, s, torch.device("cpu"))), 2)
         for name, s in dev.items()
     }
@@ -927,15 +938,15 @@ def main() -> None:
         "torch": metadata.version("torch"),
         "python": platform.python_version(),
         "seed": args.seed,
-        "dev_las": {name: round(value, 2) for name, value in best.items()},
-        "dev_las_int8": quantized,
+        "dev_las": written,
     }
     write(model, vocab, sources, args.output)
     check = dev["AnCora"][:CHECK]
     tokens = list(islice(read(args.data / DEV["AnCora"]), CHECK))
     write_check(check, tokens, predict(model, vocab, check, torch.device("cpu")), args.check)
     print(
-        f"{args.output}: {args.output.stat().st_size} bytes; LAS dev int8: {quantized}", flush=True
+        f"{args.output}: {args.output.stat().st_size} bytes; LAS dev of the written model: {written}",
+        flush=True,
     )
 
 
