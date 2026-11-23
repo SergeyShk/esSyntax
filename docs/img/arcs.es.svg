@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1012 368" width="1012" height="368" font-family="PT Sans, Source Sans Pro, Arial, sans-serif" role="img">
+<rect width="1012" height="368" rx="12" fill="white"/>
+<g transform="translate(0,308)">
+<path fill="none" stroke="#c62828" stroke-width="2.5" d="M563.1 -287.5L563.1 -18"/>
+<path d="M556.1 -19.2L570.1 -19.2L563.1 -8.0Z" fill="#c62828"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M212.0 -8C218.0 -84.0 142.8 -84.0 142.8 -17"/>
+<path d="M135.8 -19.2L149.8 -19.2L142.8 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M447.2 -8C453.2 -84.0 365.6 -84.0 365.6 -17"/>
+<path d="M358.6 -19.2L372.6 -19.2L365.6 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M744.2 -8C750.2 -84.0 650.6 -84.0 650.6 -17"/>
+<path d="M643.6 -19.2L657.6 -19.2L650.6 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M756.2 -8C750.2 -84.0 866.0 -84.0 866.0 -17"/>
+<path d="M859.0 -19.2L873.0 -19.2L866.0 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M447.2 -8C453.2 -130.0 296.9 -130.0 296.9 -17"/>
+<path d="M289.9 -19.2L303.9 -19.2L296.9 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M569.1 -8C563.1 -130.0 750.2 -130.0 750.2 -17"/>
+<path d="M743.2 -19.2L757.2 -19.2L750.2 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M224.0 -8C218.0 -176.0 453.2 -176.0 453.2 -17"/>
+<path d="M446.2 -19.2L460.2 -19.2L453.2 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M557.1 -8C563.1 -222.0 218.0 -222.0 218.0 -17"/>
+<path d="M211.0 -19.2L225.0 -19.2L218.0 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M569.1 -8C563.1 -222.0 951.0 -222.0 951.0 -17"/>
+<path d="M944.0 -19.2L958.0 -19.2L951.0 -8.0Z" fill="#ef5350"/>
+<path fill="none" stroke="#ef5350" stroke-width="2.5" d="M557.1 -8C563.1 -314.0 67.6 -314.0 67.6 -17"/>
+<path d="M60.6 -19.2L74.6 -19.2L67.6 -8.0Z" fill="#ef5350"/>
+<rect x="129.8" y="-85.0" width="101.4" height="30" rx="5" fill="white"/>
+<text x="180.4" y="-71.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">determinante</text>
+<text x="180.4" y="-59.0" font-size="10" fill="#6b6b6b" text-anchor="middle">det</text>
+<rect x="358.7" y="-85.0" width="101.4" height="30" rx="5" fill="white"/>
+<text x="409.4" y="-71.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">determinante</text>
+<text x="409.4" y="-59.0" font-size="10" fill="#6b6b6b" text-anchor="middle">det</text>
+<rect x="649.7" y="-85.0" width="101.4" height="30" rx="5" fill="white"/>
+<text x="700.4" y="-71.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">determinante</text>
+<text x="700.4" y="-59.0" font-size="10" fill="#6b6b6b" text-anchor="middle">det</text>
+<rect x="761.1" y="-85.0" width="94.1" height="30" rx="5" fill="white"/>
+<text x="808.1" y="-71.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">modificador</text>
+<text x="808.1" y="-59.0" font-size="10" fill="#6b6b6b" text-anchor="middle">amod</text>
+<rect x="328.0" y="-119.5" width="94.1" height="30" rx="5" fill="white"/>
+<text x="375.0" y="-105.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">preposición</text>
+<text x="375.0" y="-93.5" font-size="10" fill="#6b6b6b" text-anchor="middle">case</text>
+<rect x="580.5" y="-119.5" width="152.3" height="30" rx="5" fill="white"/>
+<text x="656.6" y="-105.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">complemento directo</text>
+<text x="656.6" y="-93.5" font-size="10" fill="#6b6b6b" text-anchor="middle">obj</text>
+<rect x="248.5" y="-154.0" width="174.2" height="30" rx="5" fill="white"/>
+<text x="335.6" y="-140.0" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">complemento del nombre</text>
+<text x="335.6" y="-128.0" font-size="10" fill="#6b6b6b" text-anchor="middle">nmod</text>
+<rect x="361.7" y="-188.5" width="57.7" height="30" rx="5" fill="white"/>
+<text x="390.6" y="-174.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">sujeto</text>
+<text x="390.6" y="-162.5" font-size="10" fill="#6b6b6b" text-anchor="middle">nsubj</text>
+<rect x="713.7" y="-188.5" width="86.8" height="30" rx="5" fill="white"/>
+<text x="757.1" y="-174.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">puntuación</text>
+<text x="757.1" y="-162.5" font-size="10" fill="#6b6b6b" text-anchor="middle">punct</text>
+<rect x="213.7" y="-257.5" width="203.3" height="30" rx="5" fill="white"/>
+<text x="315.4" y="-243.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="middle">complemento circunstancial</text>
+<text x="315.4" y="-231.5" font-size="10" fill="#6b6b6b" text-anchor="middle">advmod</text>
+<text x="573.1" y="-277.5" font-size="13" fill="#c62828" font-weight="bold" text-anchor="start">núcleo del predicado</text>
+<text x="67.6" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">Ayer</text>
+<text x="67.6" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">adv.</text>
+<text x="142.8" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">la</text>
+<text x="142.8" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">det.</text>
+<text x="218.0" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">hija</text>
+<text x="218.0" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">sust.</text>
+<text x="296.9" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">de</text>
+<text x="296.9" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">prep.</text>
+<text x="365.6" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">el</text>
+<text x="365.6" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">det.</text>
+<text x="453.2" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">vecino</text>
+<text x="453.2" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">sust.</text>
+<text x="563.1" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">compró</text>
+<text x="563.1" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">verbo</text>
+<text x="650.6" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">un</text>
+<text x="650.6" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">det.</text>
+<text x="750.2" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">coche</text>
+<text x="750.2" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">sust.</text>
+<text x="866.0" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">nuevo</text>
+<text x="866.0" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">adj.</text>
+<text x="951.0" y="20.0" font-size="22" fill="#212121" font-weight="bold" text-anchor="middle">.</text>
+<text x="951.0" y="40.0" font-size="13" fill="#6b6b6b" text-anchor="middle">signo</text>
+</g>
+</svg>
