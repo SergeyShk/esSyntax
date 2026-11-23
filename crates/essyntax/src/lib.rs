@@ -47,7 +47,7 @@ pub struct Relation<'p> {
     /// Number of the relation in [`Parser::relations`]
     pub label: usize,
     /// Probability of the head by the model, from 0 to 1: softmax of the scores of all head candidates of
-    /// the word (in sentences longer than 1024 words, of 64 words on each side, the root and the head
+    /// the word (in sentences longer than 256 words, of 64 words on each side, the root and the head
     /// given by the assembly of the tree)
     pub head_prob: f32,
     /// Probability of the relation with this head, from 0 to 1: softmax of the scores of the relations

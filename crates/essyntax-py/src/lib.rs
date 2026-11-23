@@ -575,7 +575,7 @@ impl Parser {
     /// Returns:
     ///     list[tuple[int, str]]: The number of the head (0 for the root) and the relation of every
     ///         word; with probs, quadruples: also the probability of the head among all the words
-    ///         of the sentence and the root (in sentences longer than 1024 words, among 64 words on
+    ///         of the sentence and the root (in sentences longer than 256 words, among 64 words on
     ///         each side, the root and the head given by the assembly of the tree) and the
     ///         probability of the relation with this head among the relations except root (1 for
     ///         root, which a rule gives to the word with head 0)

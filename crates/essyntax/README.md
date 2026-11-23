@@ -9,7 +9,7 @@ Fast Spanish dependency parser written in Rust, the core of the
   and its relation.
 - The model is a BiLSTM over the words, their endings and tags; the heads come from a biaffine score and the tree of the
   maximum weight with one root (non-projective trees too), the relations from the pair "dependent - head". In degenerate
-  sentences (more than 16 cycles or 8 root candidates among the best heads) and in sentences longer than 1024 words the
+  sentences (more than 16 cycles or 8 root candidates among the best heads) and in sentences longer than 256 words the
   tree is assembled faster: the extra roots and the nodes of cycles are attached to the best root; in long sentences the
   head is looked for among 64 words on each side and the root, and the time grows linearly with the length.
 - The part of speech is one of the 17 UD parts of speech in capitals (an unknown one is parsed as `X`), the features are

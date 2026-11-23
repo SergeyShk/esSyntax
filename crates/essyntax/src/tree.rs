@@ -9,8 +9,9 @@
 //! quadratically.
 
 /// Length of a sentence up to which the full matrix of scores is built and the tree of the maximum
-/// weight is searched
-pub(crate) const FULL: usize = 1024;
+/// weight is searched. The longest training sentence has 152 words; in longer joined dev sentences
+/// heads beyond the window are almost always wrong
+pub(crate) const FULL: usize = 256;
 /// How many cycles Chu - Liu - Edmonds contracts (no UD dev part needs more than 6)
 const CONTRACTIONS: usize = 16;
 /// How many root candidates are enumerated (no UD dev part has more than 2)
@@ -443,7 +444,7 @@ mod tests {
 
     #[test]
     fn degenerate_sentence_is_bounded_and_stack_safe() {
-        // Pairs of neighbors want each other: hundreds of 2-cycles, the threads of musl have a stack of
+        // Pairs of neighbors want each other: more than a hundred 2-cycles, the threads of musl have a stack of
         // 128 KiB
         let n = FULL + 1;
         let score = move |d: usize, h: usize| {
