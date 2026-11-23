@@ -42,7 +42,7 @@ La primera línea es lo que dan `parse_text` y el comando para un texto sin proc
 
 Las relaciones siguen la guía de [Universal Dependencies](https://universaldependencies.org/u/dep/) y, donde calla, las convenciones de AnCora, el mayor treebank del español. Un clítico dativo y un objeto indirecto con `a` son `obl:arg`, no `iobj`, como en los dos treebanks (`Le di el libro a María.`); `se` de una pasiva es `expl:pass` (`Se venden pisos.`), mientras que GSD marca casi todo `se` como `expl:pv`.
 
-El modelo tiene un punto débil conocido: una oración corta con `a` y un sustantivo tras un verbo de movimiento (`Voy al cine.`) puede recibir `obj` para el sustantivo en lugar de `obl`.
+El modelo tiene dos puntos débiles conocidos. Una oración corta con `a` y un sustantivo tras un verbo de movimiento (`Voy al cine.`) puede recibir `obj` para el sustantivo en lugar de `obl`. Los clíticos de objeto directo `me`, `te`, `nos` y `os` casi nunca reciben `obj`: en `Te quiero mucho.` el clítico recibe `expl:pv`, en `Me miró.`, `obl:arg`; esMorph suele etiquetar estos clíticos como dativos, y el modelo aprendió las relaciones de sus etiquetas.
 
 ## Modelo propio { #custom }
 

@@ -42,7 +42,7 @@ The first line is what `parse_text` and the command give for raw text; the secon
 
 The relations follow the [Universal Dependencies](https://universaldependencies.org/u/dep/) guidelines and, where they are silent, the conventions of AnCora, the largest Spanish treebank. A dative clitic and an indirect object with `a` are `obl:arg`, not `iobj`, as in both treebanks (`Le di el libro a María.`); `se` of a passive is `expl:pass` (`Se venden pisos.`), while GSD marks almost every `se` as `expl:pv`.
 
-The model has a known weakness: a short sentence with `a` and a noun after a verb of motion (`Voy al cine.`) may get `obj` for the noun instead of `obl`.
+The model has two known weaknesses. A short sentence with `a` and a noun after a verb of motion (`Voy al cine.`) may get `obj` for the noun instead of `obl`. The direct object clitics `me`, `te`, `nos` and `os` almost never get `obj`: in `Te quiero mucho.` the clitic gets `expl:pv`, in `Me miró.` - `obl:arg`; esMorph mostly tags these clitics as dative, and the model has learned the relations from its tags.
 
 ## Custom model { #custom }
 
