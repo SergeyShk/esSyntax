@@ -2,44 +2,100 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://sergeyshk.github.io/esSyntax/</loc>
-        <lastmod>2026-11-22</lastmod>
+        <lastmod>2026-11-23</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/"/>
     </url>
     <url>
         <loc>https://sergeyshk.github.io/esSyntax/authors/</loc>
-        <lastmod>2026-11-22</lastmod>
+        <lastmod>2026-11-23</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/authors/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/authors/"/>
     </url>
     <url>
+        <loc>https://sergeyshk.github.io/esSyntax/cli/</loc>
+        <lastmod>2026-11-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/cli/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/cli/"/>
+    </url>
+    <url>
         <loc>https://sergeyshk.github.io/esSyntax/installation/</loc>
-        <lastmod>2026-11-22</lastmod>
+        <lastmod>2026-11-23</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/installation/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/installation/"/>
     </url>
     <url>
+        <loc>https://sergeyshk.github.io/esSyntax/model/</loc>
+        <lastmod>2026-11-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/model/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/model/"/>
+    </url>
+    <url>
+        <loc>https://sergeyshk.github.io/esSyntax/parser/</loc>
+        <lastmod>2026-11-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/parser/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/parser/"/>
+    </url>
+    <url>
+        <loc>https://sergeyshk.github.io/esSyntax/performance/</loc>
+        <lastmod>2026-11-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/performance/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/performance/"/>
+    </url>
+    <url>
         <loc>https://sergeyshk.github.io/esSyntax/es/</loc>
-        <lastmod>2026-11-22</lastmod>
+        <lastmod>2026-11-23</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/"/>
     </url>
     <url>
         <loc>https://sergeyshk.github.io/esSyntax/es/authors/</loc>
-        <lastmod>2026-11-22</lastmod>
+        <lastmod>2026-11-23</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/authors/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/authors/"/>
     </url>
     <url>
+        <loc>https://sergeyshk.github.io/esSyntax/es/cli/</loc>
+        <lastmod>2026-11-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/cli/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/cli/"/>
+    </url>
+    <url>
         <loc>https://sergeyshk.github.io/esSyntax/es/installation/</loc>
-        <lastmod>2026-11-22</lastmod>
+        <lastmod>2026-11-23</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/installation/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/installation/"/>
+    </url>
+    <url>
+        <loc>https://sergeyshk.github.io/esSyntax/es/model/</loc>
+        <lastmod>2026-11-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/model/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/model/"/>
+    </url>
+    <url>
+        <loc>https://sergeyshk.github.io/esSyntax/es/parser/</loc>
+        <lastmod>2026-11-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/parser/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/parser/"/>
+    </url>
+    <url>
+        <loc>https://sergeyshk.github.io/esSyntax/es/performance/</loc>
+        <lastmod>2026-11-23</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sergeyshk.github.io/esSyntax/es/performance/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sergeyshk.github.io/esSyntax/performance/"/>
     </url>
 </urlset>

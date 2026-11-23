@@ -16,7 +16,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../authors/">
+        <link rel="next" href="../model/">
       
       
         
@@ -26,7 +26,7 @@
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
     
     
@@ -273,6 +273,44 @@
   
 
       
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../parser/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Analizador
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cli/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  El comando essyntax
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -489,10 +527,77 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rust" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rust
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -529,6 +634,60 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analizador
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    El comando essyntax
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -581,6 +740,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rust" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rust
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -619,6 +789,10 @@
 pip<span class="w"> </span>install<span class="w"> </span>essyntax
 </code></pre></div>
 <p>El entorno de desarrollo se describe en <a href="https://github.com/SergeyShk/esSyntax/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+<h2 id="rust">Rust<a class="headerlink" href="#rust" title="Permanent link">&para;</a></h2>
+<p>A partir de la versión 0.1.0 el núcleo del analizador se publica en crates.io como el crate <a href="https://crates.io/crates/essyntax"><code>essyntax</code></a>, y la documentación de la API está en <a href="https://docs.rs/essyntax">docs.rs</a>. El modelo no forma parte del crate: descargue el archivo <a href="https://github.com/SergeyShk/esSyntax/raw/0.1.0/data/es-syntax.bin"><code>data/es-syntax.bin</code></a> del repositorio en la etiqueta de la versión del crate (la licencia del modelo es CC BY-SA 4.0) y pase su ruta a <code>Parser::from_path</code>.</p>
+<div class="highlight"><pre><span></span><code>cargo<span class="w"> </span>add<span class="w"> </span>essyntax
+</code></pre></div>
 
 
 
