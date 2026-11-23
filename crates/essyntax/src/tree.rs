@@ -444,7 +444,7 @@ mod tests {
 
     #[test]
     fn degenerate_sentence_is_bounded_and_stack_safe() {
-        // Pairs of neighbors want each other: hundreds of 2-cycles, the threads of musl have a stack of
+        // Pairs of neighbors want each other: more than a hundred 2-cycles, the threads of musl have a stack of
         // 128 KiB
         let n = FULL + 1;
         let score = move |d: usize, h: usize| {

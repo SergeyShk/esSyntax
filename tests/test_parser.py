@@ -111,7 +111,7 @@ def test_root_relation_only_at_root(parser):
 
 
 def test_long_sentence(parser):
-    # A sentence longer than 1024 words: the head is looked for in a window, the time grows linearly
+    # A sentence longer than 256 words: the head is looked for in a window, the time grows linearly
     words = (["la", "niña", "lee", "un", "libro", "y", "el", "niño", "come", "pan"] * 400)[:4000]
     upos = ["DET", "NOUN", "VERB", "DET", "NOUN", "CCONJ", "DET", "NOUN", "VERB", "NOUN"] * 400
     relations = parser.parse(words, upos[:4000], [None] * 4000)
