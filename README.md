@@ -38,17 +38,17 @@ Wheels are built for Linux (Alpine included), macOS and Windows and for the free
 from essyntax import Parser
 
 parser = Parser()
-document = parser.parse_text("Voy al cine.")
+document = parser.parse_text("Salió del cine.")
 print([(word.form, word.head, word.deprel) for word in document.words])
-# [('Voy', 0, 'root'), ('a', 4, 'case'), ('el', 4, 'det'), ('cine', 1, 'obl'), ('.', 1, 'punct')]
+# [('Salió', 0, 'root'), ('de', 4, 'case'), ('el', 4, 'det'), ('cine', 1, 'obl'), ('.', 1, 'punct')]
 ```
 
-`parse_text` splits the text into sentences, tokens and words with the [anySeg](https://github.com/SergeyShk/anySeg) segmenter, gives the words their lemma, part of speech and features with the [esMorph](https://github.com/SergeyShk/esMorph) morphological analyzer, which also splits a verb with clitics into its words (`pónganselo` - `pongan`, `se`, `lo`), and finds the head (the word number from 1, 0 for the root) and the relation of every word; the document keeps the multiword tokens (`al` - `a`, `el`). `parser.annotate(document)` parses an anySeg document that already has its morphology, `parser.parse(words, upos, feats)` parses a sentence with your own parts of speech and features, and `parser.parse_many(sentences)` parses many sentences at once.
+`parse_text` splits the text into sentences, tokens and words with the [anySeg](https://github.com/SergeyShk/anySeg) segmenter, gives the words their lemma, part of speech and features with the [esMorph](https://github.com/SergeyShk/esMorph) morphological analyzer, which also splits a verb with clitics into its words (`pónganselo` - `pongan`, `se`, `lo`), and finds the head (the word number from 1, 0 for the root) and the relation of every word; the document keeps the multiword tokens (`del` - `de`, `el`). `parser.annotate(document)` parses an anySeg document that already has its morphology, `parser.parse(words, upos, feats)` parses a sentence with your own parts of speech and features, and `parser.parse_many(sentences)` parses many sentences at once.
 
 The `essyntax` command comes with the package and parses text from files or the standard input into [CoNLL-U](https://universaldependencies.org/format.html); its input can also be CoNLL-U with your own parts of speech and features (`essyntax -i conllu`), and `essyntax --help` lists its options:
 
 ```bash
-echo "Voy al cine." | essyntax
+echo "Salió del cine." | essyntax
 essyntax text.txt -o text.conllu
 ```
 

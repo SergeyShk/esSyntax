@@ -11,8 +11,8 @@ use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList, PyMapping, PyString, PyTuple};
 use pyo3::{IntoPyObjectExt, intern};
 
-/// The model of the package: the weights `data/es-syntax.bin` (CC BY 4.0, LICENSE-MODEL.txt) are
-/// embedded in the module
+/// The model of the package: the weights `data/es-syntax.bin` (CC BY-SA 4.0, LICENSE-MODEL.txt)
+/// are embedded in the module
 static MODEL: &[u8] = include_bytes!("../../../data/es-syntax.bin");
 /// Sentences parsed without the GIL between the checks of Ctrl+C
 const CHUNK: usize = 256;
@@ -359,8 +359,9 @@ fn is_document(value: &Bound<'_, PyAny>) -> PyResult<bool> {
 ///     Finds the head (the number of a word from 1, 0 for the root) and the Universal
 ///     Dependencies relation of every word of a sentence. The input is words with their UD part
 ///     of speech and features (as esMorph gives them); parse_text goes from text (anySeg and
-///     esMorph). Without path - the model of the package, trained on the UD AnCora treebank
-///     (CC BY 4.0). Parsing does not change the parser: it can be shared between threads
+///     esMorph). Without path - the model of the package, trained on the UD treebanks AnCora
+///     and GSD (CC BY-SA 4.0). Parsing does not change the parser: it can be shared between
+///     threads
 ///
 /// Arguments:
 ///     path (str | os.PathLike | None): esSyntax model file; None - the model of the package.
@@ -787,8 +788,8 @@ impl Parser {
     /// Parsing of a text
     ///
     /// Description:
-    ///     The anySeg segmenter splits the text into sentences, tokens and their words (`al` -
-    ///     `a`, `el`), esMorph gives the words their lemma, part of speech and features in
+    ///     The anySeg segmenter splits the text into sentences, tokens and their words (`del` -
+    ///     `de`, `el`), esMorph gives the words their lemma, part of speech and features in
     ///     context and splits into words the tokens the segmenter leaves whole (`pónganselo` -
     ///     `pongan`, `se`, `lo`), then every word gets its head and relation (annotate); the
     ///     document keeps the multiword tokens. The default segmenter and analyzer are made on
@@ -813,9 +814,9 @@ impl Parser {
     ///     ValueError: If the analyzer did not give the words their parts of speech
     ///
     /// Example:
-    ///     >>> document = Parser().parse_text("Voy al cine.")
+    ///     >>> document = Parser().parse_text("Salió del cine.")
     ///     >>> [(word.form, word.upos, word.head, word.deprel) for word in document.words]
-    ///     [('Voy', 'VERB', 0, 'root'), ('a', 'ADP', 4, 'case'), ('el', 'DET', 4, 'det'), ('cine', 'NOUN', 1, 'obl'), ('.', 'PUNCT', 1, 'punct')]
+    ///     [('Salió', 'VERB', 0, 'root'), ('de', 'ADP', 4, 'case'), ('el', 'DET', 4, 'det'), ('cine', 'NOUN', 1, 'obl'), ('.', 'PUNCT', 1, 'punct')]
     #[pyo3(signature = (text, *, segmenter = None, analyzer = None))]
     fn parse_text<'py>(
         &self,

@@ -519,10 +519,16 @@ def test_model_errors(tmp_path):
 def test_sources(parser):
     sources = parser.sources
     assert sources["ud"] == "r2.19"
-    assert sources["license"] == "CC BY 4.0"
+    # The weights take the licenses of the training treebanks: CC BY-SA 4.0 of GSD
+    assert sources["licenses"] == {
+        "UD_Spanish-AnCora": "CC BY 4.0",
+        "UD_Spanish-GSD": "CC BY-SA 4.0",
+    }
+    # The model parses every text by the conventions of AnCora
+    assert sources["treebank_marker"] == "AnCora"
     assert sources["tags"].startswith("esmorph ")
     # The tag noise of train is by treebank, as in scripts/train.py
-    assert set(sources["noise"]) == {"ancora"}
+    assert set(sources["noise"]) == {"ancora", "gsd"}
     # The checksum is the CRC32 of the file after the header of 16 bytes
     assert sources["crc32"] == f"{zlib.crc32(MODEL.read_bytes()[16:]):08x}"
 

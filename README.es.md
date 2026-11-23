@@ -38,17 +38,17 @@ Hay paquetes precompilados para Linux (también Alpine), macOS y Windows y para 
 from essyntax import Parser
 
 parser = Parser()
-document = parser.parse_text("Voy al cine.")
+document = parser.parse_text("Salió del cine.")
 print([(word.form, word.head, word.deprel) for word in document.words])
-# [('Voy', 0, 'root'), ('a', 4, 'case'), ('el', 4, 'det'), ('cine', 1, 'obl'), ('.', 1, 'punct')]
+# [('Salió', 0, 'root'), ('de', 4, 'case'), ('el', 4, 'det'), ('cine', 1, 'obl'), ('.', 1, 'punct')]
 ```
 
-`parse_text` divide el texto en oraciones, tokens y palabras con el segmentador [anySeg](https://github.com/SergeyShk/anySeg), da a las palabras su lema, categoría gramatical y rasgos con el analizador morfológico [esMorph](https://github.com/SergeyShk/esMorph), que además divide un verbo con clíticos en sus palabras (`pónganselo` - `pongan`, `se`, `lo`), y encuentra la palabra de la que depende cada palabra (su número desde 1, 0 para la raíz) y la relación entre ambas; el documento conserva los tokens multipalabra (`al` - `a`, `el`). `parser.annotate(document)` analiza un documento de anySeg que ya tiene su morfología, `parser.parse(words, upos, feats)` analiza una oración con categorías gramaticales y rasgos propios, y `parser.parse_many(sentences)` analiza muchas oraciones a la vez.
+`parse_text` divide el texto en oraciones, tokens y palabras con el segmentador [anySeg](https://github.com/SergeyShk/anySeg), da a las palabras su lema, categoría gramatical y rasgos con el analizador morfológico [esMorph](https://github.com/SergeyShk/esMorph), que además divide un verbo con clíticos en sus palabras (`pónganselo` - `pongan`, `se`, `lo`), y encuentra la palabra de la que depende cada palabra (su número desde 1, 0 para la raíz) y la relación entre ambas; el documento conserva los tokens multipalabra (`del` - `de`, `el`). `parser.annotate(document)` analiza un documento de anySeg que ya tiene su morfología, `parser.parse(words, upos, feats)` analiza una oración con categorías gramaticales y rasgos propios, y `parser.parse_many(sentences)` analiza muchas oraciones a la vez.
 
 El comando `essyntax` se instala con el paquete y analiza el texto de archivos o de la entrada estándar en [CoNLL-U](https://universaldependencies.org/format.html); la entrada también puede ser CoNLL-U con categorías gramaticales y rasgos propios (`essyntax -i conllu`), y `essyntax --help` muestra sus opciones:
 
 ```bash
-echo "Voy al cine." | essyntax
+echo "Salió del cine." | essyntax
 essyntax texto.txt -o texto.conllu
 ```
 
