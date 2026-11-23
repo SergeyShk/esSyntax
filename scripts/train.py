@@ -48,6 +48,7 @@ import zlib
 from collections import Counter
 from collections.abc import Iterator
 from importlib import metadata
+from itertools import islice
 from pathlib import Path
 
 import anyseg
@@ -802,23 +803,37 @@ def write(model: Parser, vocab: Vocab, sources: dict, path: Path) -> None:
 
 
 def write_check(
-    sentences: list[Sentence], parses: list[tuple[list[int], list[str]]], path: Path
+    sentences: list[Sentence],
+    tokens: list[list[Token]],
+    parses: list[tuple[list[int], list[str]]],
+    path: Path,
 ) -> None:
     """
-    Check file of the core: forms, UPOS and features of esMorph, heads and relations of the PyTorch model
+    Check file of the core: forms, UPOS and features of esMorph, heads and relations of the PyTorch
+    model, with the multiword tokens and SpaceAfter of the treebank, so the file reads as its text
 
     Arguments:
         sentences (list[Sentence]): Sentences
+        tokens (list[list[Token]]): Tokens of the sentences
         parses (list[tuple[list[int], list[str]]]): Parse of the quantized model
         path (Path): CoNLL-U file
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as file:
-        for s, (heads, rels) in zip(sentences, parses, strict=True):
-            for i, (form, upos, feats, head, rel) in enumerate(
-                zip(s[0], s[1], s[2], heads, rels, strict=True), 1
-            ):
-                file.write(f"{i}\t{form}\t_\t{upos}\t_\t{feats}\t{head}\t{rel}\t_\t_\n")
+        for s, sentence, (heads, rels) in zip(sentences, tokens, parses, strict=True):
+            words = iter(zip(s[1], s[2], heads, rels, strict=True))
+            for form, space, rows in sentence:
+                misc = "_" if space else "SpaceAfter=No"
+                if len(rows) > 1:
+                    span = f"{rows[0][0]}-{rows[-1][0]}"
+                    file.write(f"{span}\t{form}\t_\t_\t_\t_\t_\t_\t_\t{misc}\n")
+                    misc = "_"
+                for row, (upos, feats, head, rel) in zip(
+                    rows, islice(words, len(rows)), strict=True
+                ):
+                    file.write(
+                        f"{row[0]}\t{row[1]}\t_\t{upos}\t_\t{feats}\t{head}\t{rel}\t_\t{misc}\n"
+                    )
             file.write("\n")
 
 
@@ -872,7 +887,8 @@ def main() -> None:
     }
     write(model, vocab, sources, args.output)
     check = dev["AnCora"][:CHECK]
-    write_check(check, predict(model, vocab, check, torch.device("cpu")), args.check)
+    tokens = list(islice(read(args.data / DEV["AnCora"]), CHECK))
+    write_check(check, tokens, predict(model, vocab, check, torch.device("cpu")), args.check)
     print(
         f"{args.output}: {args.output.stat().st_size} bytes; LAS dev int8: {quantized}", flush=True
     )

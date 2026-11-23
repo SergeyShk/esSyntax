@@ -29,6 +29,10 @@ fn check() -> Vec<Sentence> {
             continue;
         }
         let cols: Vec<&str> = line.split('\t').collect();
+        // A multiword token: its words follow it
+        if cols[0].contains('-') {
+            continue;
+        }
         words.push((cols[1].to_owned(), cols[3].to_owned(), cols[5].to_owned()));
         parse.push((cols[6].parse().expect("head"), cols[7].to_owned()));
     }
