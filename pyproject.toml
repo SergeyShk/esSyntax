@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "essyntax"
-version = "0.1.0.dev2"
+version = "0.1.0.dev3"
 description = "Fast Spanish dependency parser written in Rust with a Python API"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -40,6 +40,9 @@ classifiers = [
 ]
 dependencies = ["anyseg>=0.5,<0.6", "esmorph>=0.6,<0.7"]
 
+[project.scripts]
+essyntax = "essyntax.__main__:main"
+
 [project.urls]
 Homepage = "https://github.com/SergeyShk/esSyntax"
 Repository = "https://github.com/SergeyShk/esSyntax"
@@ -59,6 +62,7 @@ cache-keys = [
     { file = "Cargo.toml" },
     { file = "Cargo.lock" },
     { file = "crates/**/*" },
+    { file = "data/es-syntax.bin" },
 ]
 
 [tool.uv.dependency-groups]
@@ -115,6 +119,8 @@ combine-as-imports = true
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["N801", "N802"]
+# The paths of the command are strings as given: pathlib shortens "./x" and makes "." of an empty path
+"python/essyntax/__main__.py" = ["PTH"]
 
 [tool.mypy]
 python_version = "3.11"

@@ -3,7 +3,7 @@
 **esSyntax** es un analizador sintáctico de dependencias del español: un núcleo en Rust con API para Python. Para cada palabra de una oración el analizador encuentra la palabra de la que depende y la relación entre ambas en la anotación de [Universal Dependencies](https://universaldependencies.org/).
 
 !!! warning "En desarrollo"
-    Por ahora el paquete contiene solo la estructura básica; el analizador llegará en las próximas versiones. Las versiones `0.1.0.devN` se publican en TestPyPI.
+    La API puede cambiar hasta la versión 0.1.0. Las versiones `0.1.0.devN` se publican en TestPyPI.
 
 ## Instalación
 

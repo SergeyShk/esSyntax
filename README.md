@@ -20,7 +20,7 @@
 **esSyntax** is a dependency parser of Spanish: a Rust core with a Python API. For every word of a sentence the parser finds its head and the relation between them in the [Universal Dependencies](https://universaldependencies.org/) annotation.
 
 > [!WARNING]
-> Work in progress: so far the package contains only the scaffolding; the parser comes in the next versions. Versions `0.1.0.devN` are published on TestPyPI.
+> Work in progress: the API may change until version 0.1.0. Versions `0.1.0.devN` are published on TestPyPI.
 
 ## Installation
 
@@ -31,6 +31,26 @@ pip install essyntax
 ```
 
 Wheels are built for Linux (Alpine included), macOS and Windows and for the free-threaded Python 3.14t and 3.15t; Rust is not needed to install them. On other platforms pip builds the package from source, which requires [Rust](https://www.rust-lang.org/tools/install) 1.88 or newer. See the [Installation](https://sergeyshk.github.io/esSyntax/installation/) page.
+
+## Quick start
+
+```python
+from essyntax import Parser
+
+parser = Parser()
+document = parser.parse_text("Salió del cine.")
+print([(word.form, word.head, word.deprel) for word in document.words])
+# [('Salió', 0, 'root'), ('de', 4, 'case'), ('el', 4, 'det'), ('cine', 1, 'obl'), ('.', 1, 'punct')]
+```
+
+`parse_text` splits the text into sentences, tokens and words with the [anySeg](https://github.com/SergeyShk/anySeg) segmenter, gives the words their lemma, part of speech and features with the [esMorph](https://github.com/SergeyShk/esMorph) morphological analyzer, which also splits a verb with clitics into its words (`pónganselo` - `pongan`, `se`, `lo`), and finds the head (the word number from 1, 0 for the root) and the relation of every word; the document keeps the multiword tokens (`del` - `de`, `el`). `parser.annotate(document)` parses an anySeg document that already has its morphology, `parser.parse(words, upos, feats)` parses a sentence with your own parts of speech and features, and `parser.parse_many(sentences)` parses many sentences at once.
+
+The `essyntax` command comes with the package and parses text from files or the standard input into [CoNLL-U](https://universaldependencies.org/format.html); its input can also be CoNLL-U with your own parts of speech and features (`essyntax -i conllu`), and `essyntax --help` lists its options:
+
+```bash
+echo "Salió del cine." | essyntax
+essyntax text.txt -o text.conllu
+```
 
 ## Development
 
@@ -64,7 +84,7 @@ Bug reports, ideas and pull requests are welcome, in English or Spanish - the [i
 
 *   **crates/essyntax** - the parser core in Rust
 *   **crates/essyntax-py** - the Python module `essyntax._essyntax` built with PyO3
-*   **python/essyntax** - the Python package
+*   **python/essyntax** - the Python package and the `essyntax` command
 *   **data** - the model and the check of its forward pass in Rust against PyTorch
 *   **scripts** - exporting the UD treebanks and training the model, checking the installed package before publishing and the licenses of the crates of the module
 *   **docs** - MkDocs documentation in English and Spanish

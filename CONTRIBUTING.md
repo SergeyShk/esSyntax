@@ -18,7 +18,7 @@ make deps                   # create the environment, install all dependencies a
 uv run pre-commit install   # hooks: linters on commit, tests on push
 ```
 
-The Rust module is built when the package is installed into the environment; `uv run` rebuilds it when the files of `crates/` or `Cargo.toml` change. The model (`data/es-syntax.bin`) is trained by `make model`: it downloads the UD treebanks and trains the model on MPS or CPU (about an hour on an Apple M3 Pro), with the versions of the training packages pinned in `scripts/train.py.lock`. The full list of commands is in `make help`.
+The Rust module is built when the package is installed into the environment; `uv run` rebuilds it when the files of `crates/`, `Cargo.toml` or the model `data/es-syntax.bin` (it is embedded in the module) change. The model (`data/es-syntax.bin`) is trained by `make model`: it downloads the UD treebanks and trains the model on MPS or CPU (about an hour on an Apple M3 Pro), with the versions of the training packages pinned in `scripts/train.py.lock`. The full list of commands is in `make help`.
 
 ## Checks
 
@@ -49,7 +49,7 @@ The pull request description answers two questions: what was done and why. If it
 
 - `crates/essyntax/` - the parser core in Rust; published on crates.io.
 - `crates/essyntax-py/` - the Python module `essyntax._essyntax` built with PyO3, not published separately.
-- `python/essyntax/` - the Python package over the module.
+- `python/essyntax/` - the Python package over the module and the `essyntax` command.
 - `tests/` - tests of the Python package; `tests/test_docs.py` keeps the two documentation languages in sync.
 - `docs/` - MkDocs (Material) documentation, `mkdocs.yml` - navigation and its Spanish translation.
 - `scripts/` - `export_ud.py` downloads the UD treebanks and `train.py` trains the model, `smoke.py` checks the installed package before publishing, `notices.py` writes the licenses of the crates of the module. The versions of the packages of a script with dependencies are pinned next to it, in `*.py.lock`.
