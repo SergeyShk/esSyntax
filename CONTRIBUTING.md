@@ -18,7 +18,7 @@ make deps                   # create the environment, install all dependencies a
 uv run pre-commit install   # hooks: linters on commit, tests on push
 ```
 
-The Rust module is built when the package is installed into the environment; `uv run` rebuilds it when the files of `crates/` or `Cargo.toml` change. The model (`data/es-syntax.bin`) is trained by `make model`: it downloads the UD treebanks and trains the model on MPS or CPU (about 40 minutes on an Apple M3 Pro), with the versions of the training packages pinned in `scripts/train.py.lock`. The full list of commands is in `make help`.
+The Rust module is built when the package is installed into the environment; `uv run` rebuilds it when the files of `crates/` or `Cargo.toml` change. The model (`data/es-syntax.bin`) is trained by `make model`: it downloads the UD treebanks and trains the model on MPS or CPU (about an hour on an Apple M3 Pro), with the versions of the training packages pinned in `scripts/train.py.lock`. The full list of commands is in `make help`.
 
 ## Checks
 

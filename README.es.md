@@ -78,4 +78,4 @@ Los informes de errores, las ideas y los pull requests son bienvenidos, en ingl�
 
 ## Licencia
 
-El código se distribuye bajo la licencia [MIT](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE.txt). El modelo está entrenado con el treebank [UD Spanish AnCora](https://github.com/UniversalDependencies/UD_Spanish-AnCora) y se distribuye bajo la licencia [CC BY 4.0](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE-MODEL.txt).
+El código se distribuye bajo la licencia [MIT](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE.txt). El modelo está entrenado con los treebanks [UD Spanish AnCora](https://github.com/UniversalDependencies/UD_Spanish-AnCora) y [UD Spanish GSD](https://github.com/UniversalDependencies/UD_Spanish-GSD) y se distribuye bajo la licencia [CC BY-SA 4.0](https://github.com/SergeyShk/esSyntax/blob/master/LICENSE-MODEL.txt).

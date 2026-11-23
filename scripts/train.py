@@ -11,28 +11,32 @@
 Training of the esSyntax model: the head and the relation of every word by the words with esMorph tags
 
 Description:
-    Takes the training and development parts of UD_Spanish-AnCora and the development part of
-    UD_Spanish-GSD from the directory of `scripts/export_ud.py`, gives the words the part of
-    speech and the features of esMorph in context (the parser gets the same tags from the user)
-    and trains the model on AnCora train. The tags are given to the gold words: the tokens of a
-    treebank with its sentences and the words of its multiword tokens make an anySeg document,
-    which esMorph annotates keeping the given words; a token that esMorph splits otherwise than
-    the treebank (`m.36`, `Al`) gets the first analysis of each of its gold words. Training makes
-    the parser robust to tagging errors: for an ambiguous word of train the first analysis with
-    other tags is taken with the probability `NOISE`, and a pair of features of a word drops out
-    with the probability `FEAT_DROPOUT`. The noise is not for a gap between the tags of train and
-    dev: esMorph tags AnCora train almost as accurately as dev. The model: the input of a word is
-    its form (the 20 thousand most frequent, lowercase), its endings of length 1-4 with a
-    word-start mark, the UPOS and the sum of the embeddings of its first 12 pairs of features; a
-    BiLSTM of two layers of 128; the head is a biaffine score and the Chu - Liu - Edmonds tree
-    with one root, the relation is a linear score of the pair "dependent - head". The training
-    point is chosen by LAS on AnCora dev; GSD dev is a control on another genre. The weights are
-    quantized to int8 by rows and written in the format of the core (`--output`, the entry
-    `sources` describes the sources and the LAS on dev); `--check` gets the parse of the first
-    sentences of AnCora dev by the same quantized model in PyTorch, the reference of the test of
-    the crate that checks the forward pass in Rust. The versions of the packages are pinned in
-    train.py.lock. On MPS and GPU training is non-deterministic: a rerun gives close but not the
-    same weights
+    Takes the training and development parts of UD_Spanish-AnCora and UD_Spanish-GSD from the
+    directory of `scripts/export_ud.py`, gives the words the part of speech and the features of
+    esMorph in context (the parser gets the same tags from the user) and trains the model on the
+    training parts of both. The tags are given to the gold words: the tokens of a treebank with
+    its sentences and the words of its multiword tokens make an anySeg document, which esMorph
+    annotates keeping the given words; a token that esMorph splits otherwise than the treebank
+    (`m.36`, `Al`) gets the first analysis of each of its gold words. Training makes the parser
+    robust to tagging errors: for an ambiguous word of train the first analysis with other tags
+    is taken with the probability `NOISE`, and a pair of features of a word drops out with the
+    probability `FEAT_DROPOUT`. The noise is not for a gap between the tags of train and dev:
+    esMorph tags AnCora and GSD train almost as accurately as dev. The model: the input of a word
+    is its form (the 20 thousand most frequent, lowercase), its endings of length 1-4 with a
+    word-start mark, the UPOS, the sum of the embeddings of its first 12 pairs of features and
+    the embedding of the treebank of its sentence, so the annotation conventions of AnCora and
+    GSD do not mix; a BiLSTM of two layers of 128; the head is a biaffine score and the Chu - Liu
+    - Edmonds tree with one root, the relation is a linear score of the pair "dependent - head".
+    A dev part is parsed with the marker of its treebank: the training point is chosen by LAS on
+    AnCora dev, GSD dev is a control. The written model parses every text as AnCora: the marker
+    of AnCora (`MARKER`) goes into the bias of the first BiLSTM layer, and the format of the core
+    has no marker. Then the weights are quantized to int8 by rows and written in the format of
+    the core (`--output`, the entry `sources` describes the sources and the LAS on dev:
+    `dev_las` at the training point, `dev_las_int8` of the written model); `--check` gets the
+    parse of the first sentences of AnCora dev by the written model in PyTorch, the reference of
+    the test of the crate that checks the forward pass in Rust. The versions of the packages are
+    pinned in train.py.lock. On MPS and GPU training is non-deterministic: a rerun gives close but
+    not the same weights
 
 Example:
     uv run --python 3.13 scripts/train.py target/ud --output data/es-syntax.bin --check data/check.conllu
@@ -58,17 +62,18 @@ import torch
 from torch import nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
-TRAIN = ["es_ancora-ud-train.conllu"]
-# Treebank of the training parts: the weights take its license
-TREEBANK = "UD_Spanish-AnCora"
+TRAIN = {"AnCora": "es_ancora-ud-train.conllu", "GSD": "es_gsd-ud-train.conllu"}
 DEV = {"AnCora": "es_ancora-ud-dev.conllu", "GSD": "es_gsd-ud-dev.conllu"}
 # Dev parts by which the training point is chosen
 SELECT = ("AnCora",)
+# Treebank whose marker the written model parses every text with
+MARKER = "AnCora"
+TREEBANK_DIM = 16
 # Sentences of AnCora dev in the check file of the core; GSD (CC BY-SA 4.0) is not distributed
 CHECK = 200
 # Tag noise of train by treebank; UPOS and features of esMorph 0.6 are right for 95.0 % of the
-# words of AnCora train and 94.9 % of dev
-NOISE = {"ancora": 0.05}
+# words of AnCora train and 94.9 % of dev, 90.1 % of GSD train and 89.8 % of dev
+NOISE = {"ancora": 0.05, "gsd": 0.05}
 # Probability that a pair of features of a word drops out in training
 FEAT_DROPOUT = 0.1
 CONFIG = {
@@ -90,8 +95,8 @@ FORMAT = 1
 
 # Token of a sentence: form, whether a space follows it, rows of its words (10 columns each)
 Token = tuple[str, bool, list[list[str]]]
-# Sentence: forms, UPOS, features, heads, relations
-Sentence = tuple[list[str], list[str], list[str], list[int], list[str]]
+# Sentence: forms, UPOS, features, heads, relations, treebank
+Sentence = tuple[list[str], list[str], list[str], list[int], list[str], str]
 
 
 def read(path: Path) -> Iterator[list[Token]]:
@@ -209,7 +214,7 @@ def tag(analyzer: esmorph.Analyzer, sentences: list[list[Token]]) -> list[list[t
 
 
 def load(
-    path: Path, analyzer: esmorph.Analyzer, rng: random.Random | None = None
+    path: Path, analyzer: esmorph.Analyzer, treebank: str, rng: random.Random | None = None
 ) -> list[Sentence]:
     """
     Sentences with the tags of esMorph and the gold heads and relations
@@ -217,6 +222,7 @@ def load(
     Arguments:
         path (Path): CoNLL-U file
         analyzer (esmorph.Analyzer): Morphological analyzer
+        treebank (str): Treebank of the file, the marker of its sentences
         rng (random.Random | None): Make the tags noisy by `NOISE` (for train)
 
     Returns:
@@ -239,6 +245,7 @@ def load(
                 [feats for _, feats in tags],
                 [int(row[6]) for row in rows],
                 [row[7] for row in rows],
+                treebank,
             )
         )
     return out
@@ -298,6 +305,7 @@ class Vocab:
         self.words = sorted(w for w, c in words.most_common(WORDS) if c >= 2)
         self.suffixes = sorted(x for x, c in sufs.items() if c >= 3)
         self.upos = sorted({u for s in sentences for u in s[1]})
+        self.treebanks = sorted({s[5] for s in sentences})
         self.feats = sorted({f for s in sentences for fs in s[2] for f in pairs(fs)})
         self.relations = sorted({r for s in sentences for r in s[4]})
         self.index = {
@@ -319,7 +327,8 @@ def encode(vocab: Vocab, sentences: list[Sentence]) -> tuple[torch.Tensor, ...]:
         sentences (list[Sentence]): Sentences of the batch
 
     Returns:
-        tuple[torch.Tensor, ...]: Words, endings, UPOS, features, heads, relations, lengths
+        tuple[torch.Tensor, ...]: Words, endings, UPOS, features, heads, relations, lengths,
+        treebanks
     """
     n = max(len(s[0]) for s in sentences) + 1
     b = len(sentences)
@@ -330,7 +339,8 @@ def encode(vocab: Vocab, sentences: list[Sentence]) -> tuple[torch.Tensor, ...]:
     heads = torch.zeros(b, n, dtype=torch.long)
     rels = torch.zeros(b, n, dtype=torch.long)
     lens = torch.tensor([len(s[0]) + 1 for s in sentences])
-    for i, (forms, tags, fs, hs, rs) in enumerate(sentences):
+    banks = torch.tensor([vocab.treebanks.index(s[5]) for s in sentences])
+    for i, (forms, tags, fs, hs, rs, _) in enumerate(sentences):
         words[i, 0], sufs[i, 0], upos[i, 0] = UNKNOWN, UNKNOWN, UNKNOWN
         for j, form in enumerate(forms, 1):
             words[i, j] = vocab.number("words", norm(form))
@@ -341,7 +351,7 @@ def encode(vocab: Vocab, sentences: list[Sentence]) -> tuple[torch.Tensor, ...]:
                 feats[i, j, k] = vocab.number("feats", pair)
             heads[i, j] = hs[j - 1]
             rels[i, j] = vocab.relation.get(rs[j - 1], 0)
-    return words, sufs, upos, feats, heads, rels, lens
+    return words, sufs, upos, feats, heads, rels, lens, banks
 
 
 def batches(sentences: list[Sentence], size: int, rng: random.Random | None) -> list[list[int]]:
@@ -406,7 +416,9 @@ class Parser(nn.Module):
         with torch.no_grad():
             # Train has no unknown pairs: the row does not learn, zero is the absence of a feature
             self.feats.weight[UNKNOWN].zero_()
-        n_in = c["word_dim"] + 4 * c["suffix_dim"] + 2 * c["tag_dim"]
+        # Marker of the treebank of a sentence: the last columns of the input; `fold` removes it
+        self.treebank: nn.Embedding | None = nn.Embedding(len(vocab.treebanks), TREEBANK_DIM)
+        n_in = c["word_dim"] + 4 * c["suffix_dim"] + 2 * c["tag_dim"] + TREEBANK_DIM
         self.lstm = nn.LSTM(
             n_in, c["hidden"], c["layers"], batch_first=True, bidirectional=True, dropout=DROPOUT
         )
@@ -425,6 +437,7 @@ class Parser(nn.Module):
         upos: torch.Tensor,
         feats: torch.Tensor,
         lens: torch.Tensor,
+        banks: torch.Tensor,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         b, n = words.shape
         if self.training:
@@ -433,15 +446,15 @@ class Parser(nn.Module):
             # A pair of features drops out whole: the padding row is the absence of the feature
             drop = torch.rand(feats.shape, device=feats.device) < FEAT_DROPOUT
             feats = feats.masked_fill(drop, PAD)
-        x = torch.cat(
-            [
-                self.word(words),
-                self.suffix(sufs).view(b, n, -1),
-                self.upos(upos),
-                self.feats(feats.view(b * n, -1)).view(b, n, -1),
-            ],
-            -1,
-        )
+        parts = [
+            self.word(words),
+            self.suffix(sufs).view(b, n, -1),
+            self.upos(upos),
+            self.feats(feats.view(b * n, -1)).view(b, n, -1),
+        ]
+        if self.treebank is not None:
+            parts.append(self.treebank(banks)[:, None, :].expand(b, n, TREEBANK_DIM))
+        x = torch.cat(parts, -1)
         packed = pack_padded_sequence(
             self.drop(x), lens.cpu(), batch_first=True, enforce_sorted=False
         )
@@ -574,10 +587,10 @@ def predict(
     out: list[tuple[list[int], list[str]]] = [([], [])] * len(sentences)
     with torch.no_grad():
         for idx in batches(sentences, 4000, None):
-            words, sufs, upos, feats, _, _, lens = (
+            words, sufs, upos, feats, _, _, lens, banks = (
                 t.to(device) for t in encode(vocab, [sentences[i] for i in idx])
             )
-            scores, rel_dep, rel_head = model(words, sufs, upos, feats, lens)
+            scores, rel_dep, rel_head = model(words, sufs, upos, feats, lens, banks)
             logp = torch.log_softmax(scores, -1).cpu().numpy()
             heads = torch.zeros(words.shape, dtype=torch.long)
             for k in range(len(idx)):
@@ -614,8 +627,8 @@ def las(sentences: list[Sentence], parses: list[tuple[list[int], list[str]]]) ->
 
 
 def loss_fn(model: Parser, batch: tuple[torch.Tensor, ...]) -> torch.Tensor:
-    words, sufs, upos, feats, heads, rels, lens = batch
-    scores, rel_dep, rel_head = model(words, sufs, upos, feats, lens)
+    words, sufs, upos, feats, heads, rels, lens, banks = batch
+    scores, rel_dep, rel_head = model(words, sufs, upos, feats, lens, banks)
     mask = torch.arange(words.shape[1], device=words.device)[None, :] < lens[:, None]
     mask[:, 0] = False
     arc = nn.functional.cross_entropy(scores[mask], heads[mask])
@@ -685,6 +698,32 @@ def train(
                 break
     model.load_state_dict(best[2])
     return best[1]
+
+
+def fold(model: Parser, vocab: Vocab, treebank: str) -> None:
+    """
+    Marker of the treebank `treebank` into the bias of the first BiLSTM layer: with one marker for
+    every sentence its part of the gates is constant, and its columns leave the input matrices of
+    both directions, so the model needs no marker
+
+    Arguments:
+        model (Parser): Model with the marker
+        vocab (Vocab): Vocabularies
+        treebank (str): Treebank whose marker stays
+    """
+    assert model.treebank is not None
+    with torch.no_grad():
+        marker = model.treebank.weight[vocab.treebanks.index(treebank)]
+        for suffix in ("", "_reverse"):
+            weight = getattr(model.lstm, f"weight_ih_l0{suffix}")
+            getattr(model.lstm, f"bias_ih_l0{suffix}").add_(weight[:, -TREEBANK_DIM:] @ marker)
+            setattr(
+                model.lstm,
+                f"weight_ih_l0{suffix}",
+                nn.Parameter(weight[:, :-TREEBANK_DIM].clone()),
+            )
+    model.lstm.input_size -= TREEBANK_DIM
+    model.treebank = None
 
 
 def quantize_(model: Parser) -> None:
@@ -842,7 +881,7 @@ def main() -> None:
     parser.add_argument("data", type=Path, help="directory of scripts/export_ud.py")
     parser.add_argument("--output", type=Path, default=Path("data/es-syntax.bin"))
     parser.add_argument("--check", type=Path, default=Path("data/check.conllu"))
-    parser.add_argument("--steps", type=int, default=12000)
+    parser.add_argument("--steps", type=int, default=20000)
     parser.add_argument(
         "--patience", type=int, default=8, help="evaluations on dev without growth before the stop"
     )
@@ -853,9 +892,12 @@ def main() -> None:
     torch.manual_seed(args.seed)
     device = torch.device(args.device)
     analyzer = esmorph.Analyzer()
-    rng = random.Random(args.seed + 7)
-    sentences = [s for name in TRAIN for s in load(args.data / name, analyzer, rng)]
-    dev = {name: load(args.data / file, analyzer) for name, file in DEV.items()}
+    sentences = [
+        s
+        for name, file in TRAIN.items()
+        for s in load(args.data / file, analyzer, name, random.Random(args.seed + 7))
+    ]
+    dev = {name: load(args.data / file, analyzer, name) for name, file in DEV.items()}
     vocab = Vocab(sentences)
     model = Parser(vocab).to(device)
     print(
@@ -864,6 +906,8 @@ def main() -> None:
     )
     best = train(model, vocab, sentences, dev, args, device)
     model = model.cpu()
+    # The model that the core computes: the marker of MARKER in the bias, int8 weights
+    fold(model, vocab, MARKER)
     quantize_(model)
     quantized = {
         name: round(las(s, predict(model, vocab, s, torch.device("cpu"))), 2)
@@ -872,10 +916,11 @@ def main() -> None:
     exported = json.loads((args.data / "sources.json").read_text(encoding="utf-8"))
     sources = {
         "ud": exported["release"],
-        "license": exported["licenses"][TREEBANK],
+        "licenses": exported["licenses"],
         "treebanks": exported["treebanks"],
-        "train": TRAIN,
+        "train": list(TRAIN.values()),
         "select": list(SELECT),
+        "treebank_marker": MARKER,
         "tags": f"esmorph {metadata.version('esmorph')}",
         "noise": NOISE,
         "feat_dropout": FEAT_DROPOUT,
